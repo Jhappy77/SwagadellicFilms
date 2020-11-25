@@ -8,5 +8,6 @@ public class TestClass {
 	
 	TestClass(){
 		System.out.println("The test is working!");
+		System.out.println("Martin test working!");
 	}
 }
