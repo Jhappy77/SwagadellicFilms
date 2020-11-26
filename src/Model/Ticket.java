@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.Date;
+import java.util.Calendar;
 
 public class Ticket {
 	
@@ -15,7 +16,7 @@ public class Ticket {
 		setSeatNumber(seatNum);
 		setPrice(p);
 		setId(s);
-		isCancellable = isNotWithinRange(showTime.getMovieDate());
+		isCancellable = cancellable(showTime.getMovieDate());
 	}
 	
 	public Date getMovieDate() { // UNFINISHED
@@ -30,12 +31,17 @@ public class Ticket {
 		
 	}
 	
-	public boolean isNotWithinRange(Date d) {	// ADDED FUNCTION
-		Date startDate = showTime.getMovieDate();
-		Date endDate = showTime.getMovieDate();
-		endDate.;
-		return (d.before(startDate) || d.after(endDate));
+	public boolean cancellable(Date d) {	// ADDED FUNCTION
+		Date startDate = subtractDays(showTime.getMovieDate(), 3);
+		return d.before(startDate);
 	}
+	
+    public static Date subtractDays(Date date, int days) {	// ADDED FUNCTION
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.DATE, -days);
+        return new Date(c.getTimeInMillis());
+    }
 
 	public int getSeatNumber() {
 		return seatNumber;
