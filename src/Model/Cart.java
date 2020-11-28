@@ -5,14 +5,27 @@ import java.util.List;
 public class Cart {
 	
 	private List<Ticket> tickets;
-	Cart cart;
+	private static Cart cart;
 	
-	public Cart() {
-		
+	private Cart() {}
+	
+	public static Cart getInstance() {
+		if(cart == null)
+			cart = new Cart();
+		return cart;
 	}
 	
-	public boolean makePayment() { // UNIMMPLEMENTED!!
-		return true;
+	public boolean makePayment() { // UNIMPLEMENTED
+		// CHECK TO SEE PAYMENT FIRST
+		
+		double total = 0;
+		for(Ticket t: tickets) {
+			total += t.getPrice();
+		}
+		
+		// CONFIRM PAYMENT TO FINANCIAL INSTITUTION
+		
+		// if successful = true, else = false
 	}
 	
 	public Cart getCart() {
@@ -20,7 +33,7 @@ public class Cart {
 	}
 	
 	public void setCart(Cart c) {
-		this.cart = c;
+		cart = c;
 	}
 	
 	public void clear() {
@@ -31,8 +44,11 @@ public class Cart {
 		tickets.add(t);
 	}
 	
-	public void removeTicket(String id) { //
-		tickets.remove(id);
+	public void removeTicket(String id) {
+		for(Ticket t: tickets) {
+			if(t.getId() == id)
+				tickets.remove(t);
+		}
 	}
 	
 }

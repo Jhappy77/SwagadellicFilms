@@ -1,16 +1,16 @@
 package Model;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class MovieScreening {
 	
-	private Date movieDate; // CHANGED from string to date
+	private LocalDateTime movieDate; // CHANGED from string to date
 	private String screenTime;
 	private String theatreName;
 	private String movieName;
 	private String id;
 	
-	public MovieScreening(Date date, String sName, String tName, String mName, String i) {
+	public MovieScreening(LocalDateTime date, String sName, String tName, String mName, String i) {
 		setMovieDate(date);
 		setScreenTime(sName);
 		setTheatreName(tName);
@@ -18,11 +18,11 @@ public class MovieScreening {
 		setId(i);
 	}
 
-	public Date getMovieDate() {
+	public LocalDateTime getMovieDate() {
 		return movieDate;
 	}
 
-	public void setMovieDate(Date movieDate) {
+	public void setMovieDate(LocalDateTime movieDate) {
 		this.movieDate = movieDate;
 	}
 	
