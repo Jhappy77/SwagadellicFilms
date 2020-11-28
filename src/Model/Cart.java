@@ -4,5 +4,7 @@ import java.util.List;
 
 public class Cart {
 	private List<Ticket> tickets;
+	public Cart cart;
+
 	
 }

@@ -1,5 +1,8 @@
 package Boundary;
 
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 public class RefundView implements View{
 	private boolean checkTicket(String id)
 	{
