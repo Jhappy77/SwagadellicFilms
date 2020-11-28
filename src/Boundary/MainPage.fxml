@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.MovieApp">
+   <children>
+      <Button layoutX="71.0" layoutY="87.0" mnemonicParsing="false" onAction="#signUp" text="Sign Up" />
+      <Button layoutX="77.0" layoutY="41.0" mnemonicParsing="false" onAction="#login" text="Login" />
+      <Button layoutX="58.0" layoutY="138.0" mnemonicParsing="false" onAction="#useAsGuest" text="Use as Guest" />
+   </children>
+</AnchorPane>
