@@ -3,10 +3,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.Menu">
+<AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.Menu">
    <children>
-      <Button layoutX="99.0" layoutY="62.0" mnemonicParsing="false" onAction="#browseTheatres" text="Browse Theatres" />
-      <Button layoutX="60.0" layoutY="116.0" mnemonicParsing="false" onAction="#browseMovies" text="Browse Movies and Showtimes" />
-      <Button layoutX="107.0" layoutY="166.0" mnemonicParsing="false" onAction="#cancelTicket" text="Cancel Ticket" />
+      <Button layoutX="59.0" layoutY="55.0" mnemonicParsing="false" onAction="#bookTickets" text="Book Tickets" />
+      <Button layoutX="57.0" layoutY="100.0" mnemonicParsing="false" onAction="#cancelTicket" text="Cancel Ticket" />
    </children>
 </AnchorPane>

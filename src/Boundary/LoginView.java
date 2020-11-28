@@ -32,7 +32,7 @@ public class LoginView implements View{
 	@Override
 	public void perform() {
 		try {
-			//window= new Stage();
+			window= new Stage();
 			Parent root =FXMLLoader.load(getClass().getResource("/Boundary/Login.fxml"));
 			Scene scene= new Scene(root);
 			window.setScene(scene);

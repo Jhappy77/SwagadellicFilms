@@ -8,13 +8,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Menu implements View {
-
+public class SpecialMenu implements View{
+	
 	@Override
 	public void perform() {
 		try {
 			Stage primaryStage = new Stage();
-			Parent root =FXMLLoader.load(getClass().getResource("/Boundary/MenuPage.fxml"));
+			Parent root =FXMLLoader.load(getClass().getResource("/Boundary/RUMenuPage.fxml"));
 			Scene scene= new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -25,9 +25,10 @@ public class Menu implements View {
 		
 	}
 	
-
 	public void bookTickets(ActionEvent event) {}
 
 	public void cancelTicket(ActionEvent event) {}
+	
+	public void payAnnualFee(ActionEvent event) {}
 
 }
