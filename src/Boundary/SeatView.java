@@ -260,7 +260,10 @@ public class SeatView {
 		lbcount.setText("Number of Seats Booked: "+ count);
 	}
 	
-	public void Continue(ActionEvent event) {}
+	public void Continue(ActionEvent event) {
+		PaymentView p= new PaymentView();
+		p.perform();
+	}
 	
 
 }
