@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 public class MovieApp extends Application {
 	
 	Stage window;
-	
+
     public static void main(String[] args) {
         launch(args);
     }
