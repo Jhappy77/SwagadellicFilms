@@ -13,33 +13,36 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class PaymentView {
+public class CancelView {
 	
-	Stage window;
+Stage window;
 	
-	ObservableList<String> cbctList;
-	
-	@FXML
-	private ChoiceBox cbct;
+	ObservableList<String> cbutList;
 	
 	@FXML
-	private TextField txtcn;
+	private ChoiceBox cbut;
 	
-	public PaymentView() {
-		 cbct = new ChoiceBox();
-		 cbctList = FXCollections.observableArrayList("Credit Card","Debit Card");
+	@FXML
+	private TextField txtsid;
+	
+	@FXML
+	private TextField txttid;
+	
+	public CancelView() {
+		 cbut = new ChoiceBox();
+		 cbutList = FXCollections.observableArrayList("Guest","Registered");
 		 initialize();
 	}
 	@FXML
 	public void initialize() {
-		cbct.setItems(cbctList);
+		cbut.setItems(cbutList);
 	}
-		 
+	
 	public void perform() {
 		
 		try {
 			window= new Stage();
-			Parent root =FXMLLoader.load(getClass().getResource("/Boundary/Payment.fxml"));
+			Parent root =FXMLLoader.load(getClass().getResource("/Boundary/Cancel.fxml"));
 			Scene scene= new Scene(root);
 			window.setScene(scene);
 			window.show();
@@ -47,11 +50,18 @@ public class PaymentView {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
-	public void confirmPayment(ActionEvent event) {
-		//Logic in here confirms payment
+	public void confirmCancellation(ActionEvent event) {
+		if(cbut.getValue().equals("Guest")) {
+			PaymentView p= new PaymentView();
+			p.perform();
+		}
+		else {
+			//For registered user add logic to make cancellation then take to the main menu
+			SpecialMenu m = new SpecialMenu();
+			m.perform();
+		}
 
 	}
 	

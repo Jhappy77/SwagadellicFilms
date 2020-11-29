@@ -25,10 +25,16 @@ public class SpecialMenu implements View{
 		
 	}
 	
-	public void bookTickets(ActionEvent event) {}
+	public void bookTickets(ActionEvent event) {
+		SelectMovieView mv =new SelectMovieView();
+		mv.perform();
+	}
 
 	public void cancelTicket(ActionEvent event) {}
 	
-	public void payAnnualFee(ActionEvent event) {}
+	public void payAnnualFee(ActionEvent event) {
+		PaymentView p= new PaymentView();
+		p.perform();
+	}
 
 }
