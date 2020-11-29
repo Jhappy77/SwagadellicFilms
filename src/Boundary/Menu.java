@@ -26,7 +26,10 @@ public class Menu implements View {
 	}
 	
 
-	public void bookTickets(ActionEvent event) {}
+	public void bookTickets(ActionEvent event) {
+		SeatView v = new SeatView();
+		v.perform();
+	}
 
 	public void cancelTicket(ActionEvent event) {}
 
