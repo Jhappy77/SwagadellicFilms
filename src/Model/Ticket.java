@@ -11,18 +11,31 @@ public class Ticket {
 	private String id;
 	private boolean isCancellable;
 	private boolean isExpired;
+	private int seatNumber;
 	
-	public Ticket(String s, MovieScreening sTime) {
+	public Ticket(String ticketId, MovieScreening sTime, int seatNumber) {
+		this.seatNumber = seatNumber;
 		setPrice(20);
-		setId(s);
+		setId(ticketId);
 		setMovieDate(sTime);
 		isCancellable = cancellable(showTime.getMovieDate());
 	}
 	
+	public boolean getIsCancellable() {
+		return isCancellable;
+	}
+	
+	public boolean getIsExpired() {
+		return isExpired;
+	}
+	
+	//TODO: Remove this function
 	public void addSeat(Seat s)
 	{
 		showTime.addSeat(s);
 	}
+	
+	
 	public boolean cancellable(LocalDateTime d) {	// ADDED FUNCTION
 		LocalDateTime startDate = subtractDays(showTime.getMovieDate(), 3);
 		return d.isBefore(startDate);
