@@ -1,36 +1,26 @@
 package Controller;
 
-import Model.AnonymousUser;
+import java.io.IOException;
+import java.util.Date;
+
+import org.json.JSONException;
+
 import Model.PaymentMethod;
 import Model.RegisteredUser;
 import Model.User;
 
 public class UserController {
-	private static User selectedUser;
+	private static User u;
 	
-	public static boolean verifyLoginDebit(String username, String password)
+	
+	public static void addUser(String username, String password, String email, Date birthdate, String name, String address, PaymentMethod method) throws JSONException, IOException
 	{
-		return false;
+		setUser(new RegisteredUser(username, password, email, birthdate, name, address, method));
+		DatabaseManager.getInstance().saveRegisteredUser((RegisteredUser)u);
 	}
 	
-	public static boolean verifyLoginCredit(String username, String password)
+	public static void setUser(User us)
 	{
-		return false;
-	}
-	
-	public static void addUser(String username, String password, String email, String birthdate, String name, String address, PaymentMethod method)
-	{
-		
-	}
-	
-	
-	public static User getActive()
-	{
-		return selectedUser;
-	}
-	
-	public void setActive(User customer)
-	{
-		selectedUser = customer;
+		u = us;
 	}
 }

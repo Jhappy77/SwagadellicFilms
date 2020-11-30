@@ -6,11 +6,11 @@ public class Payment {
 	private float dollarAmount;
 	private boolean isProcessed;
 	
-	Payment(String i, float amount)
+	public Payment(String i, float amount, PaymentMethod m)
 	{
 		id = i;
 		dollarAmount = amount;
-		method = null;
+		method = m;
 		isProcessed = false;
 	}
 	
@@ -27,6 +27,11 @@ public class Payment {
 	public void setProcess(boolean processed)
 	{
 		isProcessed = processed;
+	}
+	
+	public boolean getProcess()
+	{
+		return isProcessed;
 	}
 	
 	public String getID()

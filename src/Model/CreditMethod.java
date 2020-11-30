@@ -4,10 +4,11 @@ public class CreditMethod implements PaymentMethod{
 	private int number; 
 	private int cvv;
 	
-	CreditMethod(int n, int c)
+	
+	public CreditMethod(int n)
 	{
 		number = n; 
-		cvv = c;
+		cvv = 111;
 	}
 	@Override
 	public String validateMessage() {
@@ -24,4 +25,13 @@ public class CreditMethod implements PaymentMethod{
 		return cvv;
 	}
 
+	public void setNumber(int n)
+	{
+		number = n;
+	}
+	
+	public void setCVV(int c)
+	{
+		number = c;
+	}
 }

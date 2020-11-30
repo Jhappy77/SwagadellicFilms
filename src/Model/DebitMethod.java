@@ -4,10 +4,11 @@ public class DebitMethod implements PaymentMethod{
 	private int number;
 	private int cvv;
 	
-	DebitMethod(int n, int c)
+	
+	public DebitMethod(int n)
 	{
 		number = n;
-		cvv  = c;
+		cvv  = 111;
 	}
 	@Override
 	public String validateMessage() {
@@ -23,6 +24,16 @@ public class DebitMethod implements PaymentMethod{
 	public int getCVV()
 	{
 		return cvv;
+	}
+	
+	public void setNumber(int n)
+	{
+		number = n;
+	}
+	
+	public void setCVV(int c)
+	{
+		number = c;
 	}
 
 }

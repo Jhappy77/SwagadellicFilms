@@ -1,64 +1,76 @@
 package Boundary;
 
+import java.io.IOException;
+
+import Controller.DatabaseManager;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class LoginView{
+public class LoginView implements View{
 	
-	private Stage window;
-	private Scene scene1, scene2;
-	private void signIn(String username, String password)
+	Stage window;
+//	Scene scene;
+	
+	@FXML
+	private Label lbstatus;
+	
+	@FXML
+	private TextField txtusername;
+	
+	@FXML
+	private TextField txtpassword;
+	
+	public void begin(Stage s)
 	{
-		
+		window = s;
+		perform();
 	}
 	
-	private void signOut()
-	{
-		
+	@Override
+	public void perform() {
+		try {
+//			window = new Stage();
+			Parent root =FXMLLoader.load(getClass().getResource("/Boundary/Login.fxml"));
+			Scene scene= new Scene(root);
+			window.setScene(scene);
+			window.show();
+			} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public void setWindow(Stage win)
-	{
-		window = win;
+	public void Login(ActionEvent event) {
+		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
+		if(txtusername.getText().contentEquals("user") && txtpassword.getText().equals("pass")) {
+//			if(DatabaseManager.getInstance().validateLogin(txtusername.getText(), txtpassword.getText())){
+				lbstatus.setText("Login Success");
+//			else
+//				lbstatus.setText("Login failed, try again");
+		}
+//		}
+		if(lbstatus.getText().contentEquals("Login Success")) {
+			SpecialMenu m = new SpecialMenu();
+			m.begin(window);
+		}
 	}
 	
-	public void setScene1(Scene s)
+	public void returnToMenu(ActionEvent event) throws IOException
 	{
-		scene1 = s;
+		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
+		Parent root =FXMLLoader.load(getClass().getResource("/Boundary/MainPage.fxml"));
+		Scene scene= new Scene(root);
+		window.setScene(scene);
+		window.show();
 	}
-	
-	public void setScene2(Scene s)
-	{
-		scene2 = s;
-	}
-	
-	public void perform(VBox layout1, StackPane layout2, Button b)
-	{
-		
-//		window.setScene(scene1);
-//		Button button2 = new Button("Go back ");
-		b.setOnAction(e->{
-			window.setScene(scene1);
-		});
-		Button button2 = new Button("Sign in");
-		button2.setOnAction(e->{
-			window.setScene(scene2);
-		});
-		layout2.getChildren().addAll(button2);
-//		StackPane layout2 = new StackPane();
-//		layout2.getChildren().addAll(button2);
-//		scene2 = new Scene(layout2, 200, 200);
-////		window.setScene(scene1);
-//		window.show();
-	}
-	
-//	@Override
-//	public void perform() {
-//		//prompt user to enter username and password here
-//		//pass username and password to private functions
-//	}
-
 }
+
+
+

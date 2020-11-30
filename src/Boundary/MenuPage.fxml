@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="272.0" prefWidth="274.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.Menu">
+   <children>
+      <Button layoutX="96.0" layoutY="93.0" mnemonicParsing="false" onAction="#bookTickets" text="Book Tickets" />
+      <Button layoutX="99.0" layoutY="136.0" mnemonicParsing="false" onAction="#cancelTicket" text="Cancel Ticket" />
+      <Button layoutX="118.0" layoutY="180.0" mnemonicParsing="false" onAction="#returnToMenu" text="return" />
+      <Button layoutX="208.0" layoutY="14.0" mnemonicParsing="false" onAction="#signUp" text="Subscribe" />
+      <Button mnemonicParsing="false" text="Button" />
+      <Button layoutX="153.0" layoutY="14.0" mnemonicParsing="false" onAction="#logIn" text="Sign In" />
+   </children>
+</AnchorPane>
