@@ -1,15 +1,18 @@
 package Model;
 
+// UPDATED: changed genre to theatreType
 public class MovieTheatre {
 
 	private String location;
 	private String name;
 	private String id;
+	private String theatreType;
 	
-	public MovieTheatre(String loc, String n, String i) {
+	public MovieTheatre(String loc, String n, String i, String g) {
 		setLocation(loc);
 		setName(n);
 		setId(i);
+		setTheatreType(g);
 	}
 
 	public String getLocation() {
@@ -34,6 +37,14 @@ public class MovieTheatre {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getTheatreType() {
+		return theatreType;
+	}
+
+	public void setTheatreType(String theatreType) {
+		this.theatreType = theatreType;
 	}
 	
 }

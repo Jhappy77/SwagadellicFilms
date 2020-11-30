@@ -9,13 +9,15 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.sql.Date;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -119,16 +121,14 @@ public class DatabaseManager {
 		List<Movie> movieList = new ArrayList<Movie>();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		try {
-			JSONObject jsonFile = readJsonFromUrl(URL);
-			Iterator iterator = jsonFile.keys();
-			JSONArray jsonArray = new JSONArray();
-			while (iterator.hasNext()){
-				String id = (String) iterator.next();
-				String movie_name = (String) iterator.next();
-				String genre = (String) iterator.next();
-				Date release_date = (Date) format.parse((String) iterator.next());
-				String length = (String) iterator.next(); // not used
-				Movie m = new Movie(movie_name, genre, id, release_date);
+			JSONArray j = readJsonArrayFromUrl(URL);
+			for(int i = 0; i < j.length(); i++) {
+				int id = j.getJSONObject(i).getInt("id");
+				String movie_name = j.getJSONObject(i).getString("movie_name");
+				String genre = j.getJSONObject(i).getString("genre");
+				String release_date = j.getJSONObject(i).getString("release_date");
+				Date date = format.parse(release_date);
+				Movie m = new Movie(movie_name, genre, String.valueOf(id), date);
 				movieList.add(m);
 			}
 		} catch (IOException | JSONException e) {
@@ -142,16 +142,14 @@ public class DatabaseManager {
 		List<Movie> movieList = new ArrayList<Movie>();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		try {
-			JSONObject jsonFile = readJsonFromUrl(URL);
-			Iterator iterator = jsonFile.keys();
-			JSONArray jsonArray = new JSONArray();
-			while (iterator.hasNext()) {
-				String id = (String) iterator.next();
-				String movie_name = (String) iterator.next();
-				String genre = (String) iterator.next();
-				Date release_date = (Date) format.parse((String) iterator.next());
-				String length = (String) iterator.next(); // not used
-				Movie m = new Movie(movie_name, genre, id, release_date);
+			JSONArray j = readJsonArrayFromUrl(URL);
+			for(int i = 0; i < j.length(); i++) {
+				int id = j.getJSONObject(i).getInt("id");
+				String movie_name = j.getJSONObject(i).getString("movie_name");
+				String genre = j.getJSONObject(i).getString("genre");
+				String release_date = j.getJSONObject(i).getString("release_date");
+				Date date = format.parse(release_date);
+				Movie m = new Movie(movie_name, genre, String.valueOf(id), date);
 				movieList.add(m);
 			}
 		} catch (IOException | JSONException e) {
@@ -161,18 +159,18 @@ public class DatabaseManager {
 	}
 	
 	public List<MovieTheatre> queryTheatresWithMovie(String movieId) {
-		String URL = baseURL + "theatre?movieId=" + movieId;
+		String URL = baseURL + "theatre?format=json&movieId=" + movieId;
 		List<MovieTheatre> theatreList = new ArrayList<MovieTheatre>();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		try {
-			JSONObject jsonFile = readJsonFromUrl(URL);
-			Iterator iterator = jsonFile.keys();
-			while (iterator.hasNext()) {
-				String id = (String) iterator.next();
-				String theatre_name = (String) iterator.next();
-				String address = (String) iterator.next();
-				String theatre_type = (String) iterator.next(); // not used
-				MovieTheatre mt = new MovieTheatre(address, theatre_name, id);
-				theatreList.add(mt);
+			JSONArray j = readJsonArrayFromUrl(URL);
+			for(int i = 0; i < j.length(); i++) {
+				int id = j.getJSONObject(i).getInt("id");
+				String theatre_name = j.getJSONObject(i).getString("theatre_name");
+				String address = j.getJSONObject(i).getString("address");
+				String theatre_type = j.getJSONObject(i).getString("theatre_type");
+				MovieTheatre m = new MovieTheatre(address, theatre_name, String.valueOf(id), theatre_type);
+				theatreList.add(m);
 			}
 		} catch (IOException | JSONException e) {
 			e.printStackTrace();
@@ -180,36 +178,56 @@ public class DatabaseManager {
 		return theatreList;
 	}
 	
-	// How do i get the theatre and movie names from this?
+	// screeningId and element in theatreList MUST match for this function to work
+	// I also need to consider both EARLY screenings and REGULAR screenings
 	public List<MovieScreening> queryScreeningsAtTheatre(String movieId, String theatreId) {
-		String URL = baseURL + "screening?movieId=" + movieId + "&theatreId=" + theatreId;
+		String URL = baseURL + "screening?format=json&movieId=" + movieId + "&theatreId=" + theatreId;
 		List<MovieScreening> screeningList = new ArrayList<MovieScreening>();
 		try {
-			JSONObject jsonFile = readJsonFromUrl(URL);
-			Iterator iterator = jsonFile.keys();
-			while (iterator.hasNext()) {
-				String id = (String) iterator.next();
-				String screening_time = (String) iterator.next();
-				LocalDateTime aLDT = LocalDateTime.parse(screening_time);
-				//UNFINISHED
+			JSONArray j = readJsonArrayFromUrl(URL);
+			for(int k = 0; k < j.length(); k++) {
+				int id = j.getJSONObject(k).getInt("id");
+				String screening_time = j.getJSONObject(k).getString("screening_time");
+				LocalDateTime ldt = LocalDateTime.parse(screening_time);
+				
+				// find Movie
+				List<Movie> m = queryMovies();
+				String movieName = "";
+				for(int i = 0; i < m.size(); i++) {
+					if(m.get(i).getId().contentEquals(movieId))
+						movieName = m.get(i).getName();
+					continue;
+				}
+				
+				// find Theatre
+				List<MovieTheatre> mt = queryTheatresWithMovie(movieId);
+				String theatreName = "";
+				for(int i = 0; i < mt.size(); i ++) {
+					if(mt.get(i).getId().contentEquals(theatreId))
+						theatreName = mt.get(i).getName();
+					continue;
+				}
+				
+				MovieScreening ms = new MovieScreening(ldt, theatreName, movieName, String.valueOf(id));
+				screeningList.add(ms);
 			}
-		} catch (IOException | JSONException e) {
+		} catch (IOException | JSONException | ParseException e) {
 			e.printStackTrace();
 		}
 		return screeningList;
 	}
 	
-	public boolean queryTicket(String ticketId) {
-        String URL = baseURL + "ticket?tickedId=" + ticketId;
+	public Ticket queryTicket(String ticketId) {
+        String URL = baseURL + "ticket?format=json&ticketId=" + ticketId;
         try {
-            JSONObject jsonFile = readJsonFromUrl(URL);
-            if (jsonFile.get(ticketId) != null) {
-               return true;
+            JSONObject j = readJsonFromUrl(URL);
+            if (j.has(ticketId)) {
+               Ticket t = new Ticket(ticketId, movieScreening);
             }
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
 	
 	 public boolean queryPayment(String paymentId) {
@@ -261,13 +279,23 @@ public class DatabaseManager {
 	
 	
 	// USE THIS FOR TESTING
-//		public static void main(String[] args) {
+//		public static void main(String[] args) throws ParseException {
 //			DatabaseManager inst = DatabaseManager.getInstance();
 //			try {
 //				System.out.println("Testing");
-//				JSONArray j = inst.readJsonArrayFromUrl("https://calm-shelf-23678.herokuapp.com/swagDB/movies?format=json");
+//				JSONArray j = inst.readJsonArrayFromUrl("https://calm-shelf-23678.herokuapp.com/swagDB/ticket?format=json&ticketId=1");
 //				System.out.println(j.length());
 //				System.out.println(j);
+//				for(int i = 0; i < j.length(); i++) {
+//					int id = j.getJSONObject(i).getInt("id");
+//					String movie_name = j.getJSONObject(i).getString("screening_time");
+//					String genre = j.getJSONObject(i).getString("genre");
+//					String release_date = j.getJSONObject(i).getString("release_date");
+//					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//					Date date = format.parse(release_date);
+//					MovieScreening m = new MovieScreening(movie_name, genre, String.valueOf(id), date);
+//					System.out.println(m.getGenre() + "   " + m.getId() + "   " + m.getName() + "   " + m.getReleaseDate());
+//				}
 //			} catch (JSONException e) {
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();

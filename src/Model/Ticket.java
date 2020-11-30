@@ -49,11 +49,9 @@ public class Ticket {
 		showTime = sTime;
 	}
 	
-	public String getTime() {
-		return showTime.getScreenTime();
-	}
-	
-
+//	public String getTime() {
+//		return showTime.getScreenTime();
+//	}
 
 	public double getPrice() {
 		return price;
