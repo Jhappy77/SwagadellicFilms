@@ -74,4 +74,3 @@ public class MovieApp extends Application {
 
 
 }
->>>>>>> db8d291e3cc17b15de7c499ba4643a70ab250c0b

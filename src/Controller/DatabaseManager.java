@@ -237,6 +237,19 @@ public class DatabaseManager {
 	    }
 	}
 	
+	public static JSONArray readJsonArrayFromUrl(String url) throws IOException, JSONException{
+		InputStream is = new URL(url).openStream();
+		try {
+			BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+			String jsonText = readAll(rd);
+			JSONArray json = new JSONArray(jsonText);
+			return json;
+	    } finally {
+	    	is.close();
+	    }
+	}
+	
+	
 	private static String readAll(Reader rd) throws IOException {
 		StringBuilder sb = new StringBuilder();
 	    int cp;
@@ -245,4 +258,22 @@ public class DatabaseManager {
 	    }
 	    return sb.toString();
 	  }
+	
+	
+	// USE THIS FOR TESTING
+//		public static void main(String[] args) {
+//			DatabaseManager inst = DatabaseManager.getInstance();
+//			try {
+//				System.out.println("Testing");
+//				JSONArray j = inst.readJsonArrayFromUrl("https://calm-shelf-23678.herokuapp.com/swagDB/movies?format=json");
+//				System.out.println(j.length());
+//				System.out.println(j);
+//			} catch (JSONException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
 }
