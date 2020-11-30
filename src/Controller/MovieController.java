@@ -12,12 +12,19 @@ public class MovieController {
 	public final static String DB_URL = "https://calm-shelf-23678.herokuapp.com/swagDB/";
 	private static MovieScreening selectedScreening;
 	
-	public static Movie findMovie(String movieName)
-	{
-		String movieURL = DB_URL + "movies";
-		
-		return null;
+	
+	public static MovieScreening getSelectedScreening() {
+		return selectedScreening;
 	}
+	
+	//TODO: This is a method for searching movies. 
+	//We probably don't need it.
+//	public static Movie findMovie(String movieName)
+//	{
+//		String movieURL = DB_URL + "movies";
+//		
+//		return null;
+//	}
 	
 	public static MovieTheatre findTheatre(Movie movie)
 	{

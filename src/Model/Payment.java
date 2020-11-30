@@ -1,14 +1,17 @@
 package Model;
 
+import java.util.UUID;
+
 public class Payment {
 	private String id;
 	private PaymentMethod method;
 	private float dollarAmount;
 	private boolean isProcessed;
 	
-	public Payment(String i, float amount, PaymentMethod m)
+	public Payment(float amount, PaymentMethod m)
 	{
-		id = i;
+		//Generates a random UUID
+		id = UUID.randomUUID().toString().substring(0, 30);
 		dollarAmount = amount;
 		method = m;
 		isProcessed = false;
@@ -29,7 +32,7 @@ public class Payment {
 		isProcessed = processed;
 	}
 	
-	public boolean getProcess()
+	public boolean getIsProcessed()
 	{
 		return isProcessed;
 	}
