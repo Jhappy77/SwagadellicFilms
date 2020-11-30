@@ -1,6 +1,9 @@
 package Boundary;
 
+import javafx.stage.Stage;
+
 public class RefundView implements View{
+	Stage window;
 	private boolean checkTicket(String id)
 	{
 		return false;
@@ -20,6 +23,12 @@ public class RefundView implements View{
 	public void perform() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void begin(Stage s) {
+		window = s;
+		perform();
 	}
 
 }

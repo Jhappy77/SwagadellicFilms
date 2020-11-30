@@ -3,11 +3,15 @@ package Controller;
 import java.util.ArrayList;
 
 import Model.PaymentMethod;
+import Model.Seat;
 import Model.Ticket;
 import Model.User;
 
 public class PaymentController {
+	public static ArrayList<Ticket> tickets;
+	public static ArrayList<Seat> bookedSeats;
 	private User u;
+	
 	public static void addPayment(User u)
 	{
 		

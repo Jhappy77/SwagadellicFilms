@@ -1,8 +1,20 @@
 package Boundary;
 
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import Controller.MovieController;
+import Controller.PaymentController;
+import Model.MovieScreening;
+import Model.Seat;
+import Model.Ticket;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -10,63 +22,56 @@ import javafx.stage.Stage;
  
 public class MovieApp extends Application {
 
+	Stage window;
+	Scene scene;
+
     public static void main(String[] args) {
+    	MovieController.showTimes = new ArrayList<MovieScreening>();
+    	PaymentController.tickets = new ArrayList<Ticket>();
+    	PaymentController.bookedSeats = new ArrayList<Seat>();
         launch(args);
     }
+    
 
-    Stage primaryStage; 
+    
 
-    @Override
-    public void start(Stage primaryStage) {
-
-        primaryStage.setScene(scene1View());
-        primaryStage.show();
-        this.primaryStage = primaryStage;
-    }
-
-
-    public void switchView(Scene s){
-        primaryStage.setScene(s);
-    }
-
-    public Scene scene1View(){
-
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
- 
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-                switchView(scene2View());
-            }
-        });
-
-
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        return new Scene(root, 900, 550);
-    }
-
-    public Scene scene2View(){
-        Button btn = new Button();
-        btn.setText("Hola!");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
- 
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hola world!");
-                switchView(scene1View());
-            }
-        });
+	@Override
+	public void start(Stage primaryStage){
+		
+		try {
+			window= new Stage();
+			Parent root =FXMLLoader.load(getClass().getResource("/Boundary/MainPage.fxml"));
+			scene= new Scene(root);
+			window.setScene(scene);
+			window.show();
+			} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.print("error");
+		}
+		
+	}
+	
+	public void login(ActionEvent event) {
+		LoginView lv = new LoginView();
+		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
+		lv.begin(window);
+	}
+	
+	public void signUp(ActionEvent event) {
+		
+		SignUpView sv= new SignUpView();
+		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
+		sv.begin(window);
+		
+	}
+	
+	public void useAsGuest(ActionEvent event) {
+		Menu m= new Menu();
+		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
+		m.begin(window);
+		m.perform();
+	}
 
 
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        return new Scene(root, 800, 550);
-    }
-
-
-
-
- }
+}
+>>>>>>> db8d291e3cc17b15de7c499ba4643a70ab250c0b
