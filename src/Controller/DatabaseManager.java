@@ -30,6 +30,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import Model.Cart;
 import Model.CreditMethod;
 import Model.DebitMethod;
 import Model.Movie;
@@ -65,7 +66,7 @@ public class DatabaseManager {
         processUrl("save-ticket");
         Map<String,String> arguments = new HashMap<>();
         arguments.put("ticket_id", ticketToAdd.getId());
-        arguments.put("seat_no", ticketToAdd.getSeatNumber());
+        arguments.put("seat_no", Integer.toString(ticketToAdd.getSeatNumber()));
         arguments.put("screening_id", ticketToAdd.getScreening().getId());
         // PUT USER ID
         processPost(arguments);
@@ -195,16 +196,22 @@ public class DatabaseManager {
 					String screening_time = j.getJSONObject(i).getString("screening_time");
 					String date1 = "", date2 = "";
 					int k =0 ;
-					while(k < screening_time.length())
+//					while(k < 10)
+//					{
+//						char c = screening_time.charAt(k);
+//						date1 += c;
+//						date2 += c;
+//					}
+					while(k < screening_time.length()-6)
 					{
 						char c = screening_time.charAt(k);
 						if(c=='T')
-							break;
+							c = ' ';
 						date1 += c;
 						k++;
 					}
 					
-					k++;
+					//k++;
 					
 //					String date = "";
 //					for(int k=0; k<screening_time.length(); k++)
@@ -213,12 +220,13 @@ public class DatabaseManager {
 //							date+=screening_time.charAt(k);
 //					}
 					
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss-HH:mm");
-					LocalDateTime ldt = LocalDateTime.parse(date.toString(), formatter);
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+					LocalDateTime ldt = LocalDateTime.parse(date1.toString(), formatter);
 					String theatre_name = j.getJSONObject(i).getJSONObject("theatre_id").getString("theatre_name");
 					String movie_name = j.getJSONObject(i).getJSONObject("movie_id").getString("movie_name");
-					String id = j.getJSONObject(i).getString("id");
-					MovieScreening ms = new MovieScreening(ldt, theatre_name, movie_name, id);
+					int id = j.getJSONObject(i).getInt("id");
+					String id1 = String.valueOf(id);
+					MovieScreening ms = new MovieScreening(ldt, theatre_name, movie_name, id1);
 					screeningList.add(ms);
 				}
 			}
@@ -240,7 +248,7 @@ public class DatabaseManager {
             	String movie_name = j.getJSONObject("screening_id").getJSONObject("movie_id").getString("movie_name");
             	String theatre_name = j.getJSONObject("screening_id").getJSONObject("theatre_id").getString("theatre_name");
             	MovieScreening ms = new MovieScreening(ldt, theatre_name, movie_name, screening_id);
-            	String seat_num = j.getString("seat_no");
+            	int seat_num = Integer.parseInt(j.getString("seat_no"));
             	Ticket t = new Ticket(ticketId, ms, seat_num);
             	return t;
             }
@@ -347,3 +355,4 @@ public class DatabaseManager {
 	        inst.processPost(arguments);
 		}
 }
+
