@@ -90,6 +90,7 @@ public class DatabaseManager {
 		arguments.put("birthdate",  dateFormat.format(userInfo.getDateOfBirth())); //
 		arguments.put("password", userInfo.getPassword()); //
 		arguments.put("email",  userInfo.getEmail()); //
+		processPost(arguments);
 	}
 	
 	// need to implement
@@ -329,8 +330,8 @@ public class DatabaseManager {
 	
 	
 	// USE THIS FOR TESTING
-		public static void main(String[] args) throws ParseException, IOException {
-			DatabaseManager inst = DatabaseManager.getInstance();
+//		public static void main(String[] args) throws ParseException, IOException {
+//			DatabaseManager inst = DatabaseManager.getInstance();
 //			try {
 //				System.out.println("Testing");
 //				JSONArray j = inst.readJsonArrayFromUrl("https://calm-shelf-23678.herokuapp.com/swagDB/movies?format=json");
@@ -343,16 +344,13 @@ public class DatabaseManager {
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();
 //			}
+//		
+//			
+//	        inst.processUrl("save-debit");
+//	        Map<String,String> arguments = new HashMap<>();
+//	        arguments.put("user_id", "johncena@shaw.ca");
+//	        arguments.put("debit_number", "99");
+//	        inst.processPost(arguments);
 //		}
-			
-	        inst.processUrl("save-debit");
-	        Map<String,String> arguments = new HashMap<>();
-	        arguments.put("user_id", "99");
-	        arguments.put("debit_number", "99");
-//	        arguments.put("screening_id", "99");
-//	        arguments.put("user_id", "99");
-	        // PUT USER ID
-	        inst.processPost(arguments);
-		}
 }
 

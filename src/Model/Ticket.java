@@ -22,11 +22,6 @@ public class Ticket {
 	}
 	
 	
-	public int getSeatNumber() {
-		return seatNumber;
-	}
-	
-	
 	public boolean getIsCancellable() {
 		return isCancellable;
 	}
@@ -93,11 +88,11 @@ public class Ticket {
 		return showTime;
 	}
 
-	public String getSeatNumber() {
+	public int getSeatNumber() {
 		return seatNumber;
 	}
 
-	public void setSeatNumber(String seatNumber) {
+	public void setSeatNumber(int seatNumber) {
 		this.seatNumber = seatNumber;
 	}
 	
