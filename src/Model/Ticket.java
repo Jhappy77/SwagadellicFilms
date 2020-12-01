@@ -11,15 +11,21 @@ public class Ticket {
 	private String id;
 	private boolean isCancellable;
 	private boolean isExpired;
-	private String seatNumber;
+	private int seatNumber;
 	
-	public Ticket(String ticketId, MovieScreening sTime, String seatNumber) {
+	public Ticket(String ticketId, MovieScreening sTime, int seatNumber) {
 		this.seatNumber = seatNumber;
 		setPrice(20);
 		setId(ticketId);
 		setMovieDate(sTime);
 		isCancellable = cancellable(showTime.getMovieDate());
 	}
+	
+	
+	public int getSeatNumber() {
+		return seatNumber;
+	}
+	
 	
 	public boolean getIsCancellable() {
 		return isCancellable;
