@@ -65,7 +65,16 @@ public class DatabaseManager {
 	
 <<<<<<< HEAD
 	public List<Integer> queryBookedSeats(String screeningId) {
-		return null;
+		//PLACEHOLDER - Can replace with real query function when made
+		List<Integer> li = new ArrayList<>();
+		li.add(1);
+		li.add(5);
+		li.add(8);
+		li.add(24);
+		li.add(53);
+		li.add(87);
+		li.add(88);
+		return li;
 	}
 	
 	// How do I get screening_id and user_id from this?

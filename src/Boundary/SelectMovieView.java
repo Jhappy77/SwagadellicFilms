@@ -233,7 +233,8 @@ public class SelectMovieView {
 					 showTime = MSList.get(i);
 			 }
 		 }
-		 SeatController.theScreening = showTime;
+		MovieController.setSelectedScreening(showTime);
+		
 		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
 		SeatView sv = new SeatView();
 		sv.begin(window);

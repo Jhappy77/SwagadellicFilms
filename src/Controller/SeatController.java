@@ -3,26 +3,21 @@ package Controller;
 import java.util.List;
 import java.util.UUID;
 
+import Boundary.Seat;
 import Model.Cart;
 import Model.MovieScreening;
-import Model.Seat;
 import Model.Ticket;
 
 public class SeatController {
 	
 	// The screening that is currently selected
-	public static MovieScreening theScreening;
+	private static MovieScreening theScreening;
 	
 	
 	public SeatController() {
 		//TODO: Add some error catching if there is no selected screening
 		theScreening = MovieController.getSelectedScreening();
 	}
-	
-//	public static void bookSeat(Seat seat)
-//	{
-//		
-//	}
 	
 	private static void addTicketToCart(Ticket ticket)
 	{
@@ -47,9 +42,9 @@ public class SeatController {
 		return dbm.queryBookedSeats(theScreening.getId());
 	}
 	
-	public void addSeatsToCart(List<String> ids)
+	public void addSeatsToCart(List<Integer> ids)
 	{
-		for(String seatId: ids) {
+		for(int seatId: ids) {
 			// Generates a random Ticket ID
 			String ticketId = UUID.randomUUID().toString().substring(0, 20);
 			// Creates a ticket

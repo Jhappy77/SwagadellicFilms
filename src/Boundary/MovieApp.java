@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import Controller.MovieController;
 import Controller.PaymentController;
 import Model.MovieScreening;
-import Model.Seat;
 import Model.Ticket;
 import javafx.application.Application;
 import javafx.event.ActionEvent;

@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import Boundary.Seat;
+
 public class Ticket {
 	
 	private MovieScreening showTime;

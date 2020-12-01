@@ -5,59 +5,17 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="450.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.SeatView">
+<AnchorPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.SeatView" stylesheets="Boundary/Style.css">
    <children>
-      <CheckBox fx:id="A1" layoutX="100.0" layoutY="76.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="A3" layoutX="147.0" layoutY="76.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="A2" layoutX="123.0" layoutY="76.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="B1" layoutX="100.0" layoutY="104.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="B2" layoutX="123.0" layoutY="104.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="A7" layoutX="249.0" layoutY="76.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="A6" layoutX="225.0" layoutY="76.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="B3" layoutX="147.0" layoutY="104.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="B5" layoutX="198.0" layoutY="104.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="A4" layoutX="173.0" layoutY="76.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="B4" layoutX="172.0" layoutY="104.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="A5" layoutX="199.0" layoutY="76.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <Label layoutX="102.0" layoutY="58.0" text="1" />
-      <Label layoutX="125.0" layoutY="58.0" text="2" />
-      <Label layoutX="152.0" layoutY="58.0" text="3" />
-      <Label layoutX="178.0" layoutY="58.0" text="4" />
-      <Label layoutX="84.0" layoutY="76.0" text="A" />
-      <Label layoutX="84.0" layoutY="104.0" text="B" />
-      <Label layoutX="84.0" layoutY="133.0" text="C" />
-      <Label layoutX="184.0" layoutY="208.0" />
-      <Label layoutX="186.0" layoutY="236.0" />
-      <Label fx:id="lblBookedSeatsECR" layoutX="293.0" layoutY="113.0" prefHeight="17.0" prefWidth="66.0" />
-      <Label fx:id="lblAvailableSeatsECR1" layoutX="293.0" layoutY="142.0" prefHeight="17.0" prefWidth="66.0" />
-      <Label fx:id="lblHeaderECR" layoutX="24.0" layoutY="28.0" prefHeight="17.0" prefWidth="340.0" />
-      <Rectangle fx:id="screenShapeECR" height="30.0" layoutX="99.0" layoutY="22.0" stroke="WHITE" strokeLineJoin="ROUND" strokeType="INSIDE" width="175.0" />
-      <Label fx:id="lbscreen" layoutX="165.0" layoutY="28.0" text="SCREEN" textFill="WHITE" />
-      <CheckBox fx:id="B6" layoutX="225.0" layoutY="104.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="B7" layoutX="249.0" layoutY="104.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="C1" layoutX="100.0" layoutY="133.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="C2" layoutX="123.0" layoutY="133.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="C4" layoutX="173.0" layoutY="133.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="C3" layoutX="147.0" layoutY="133.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="C5" layoutX="199.0" layoutY="133.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="C6" layoutX="225.0" layoutY="133.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="C7" layoutX="249.0" layoutY="133.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="D1" layoutX="100.0" layoutY="161.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="D2" layoutX="123.0" layoutY="161.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="D3" layoutX="147.0" layoutY="161.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="D6" layoutX="225.0" layoutY="161.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="D7" layoutX="249.0" layoutY="161.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="D4" layoutX="173.0" layoutY="162.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <CheckBox fx:id="D5" layoutX="199.0" layoutY="162.0" mnemonicParsing="false" onAction="#checkEvent" prefHeight="17.0" prefWidth="17.0" />
-      <Label layoutX="229.0" layoutY="59.0" text="6" />
-      <Label layoutX="254.0" layoutY="59.0" text="7" />
-      <Label layoutX="204.0" layoutY="59.0" text="5" />
-      <Label layoutX="84.0" layoutY="161.0" text="D" />
-      <Label fx:id="lbmoviename" layoutX="31.0" layoutY="208.0" text="Movie Name" />
-      <Label fx:id="lbss" layoutX="295.0" layoutY="43.0" prefHeight="142.0" prefWidth="140.0" text="Selected Seats" />
-      <Button layoutX="293.0" layoutY="351.0" mnemonicParsing="false" onAction="#Continue" text="Continue" />
-      <Button layoutX="80.0" layoutY="351.0" mnemonicParsing="false" text="Go Back" />
-      <Label fx:id="lbcount" layoutX="265.0" layoutY="208.0" prefHeight="17.0" prefWidth="161.0" text="Number of Seats Booked" />
+      <Rectangle fx:id="screenShapeECR" height="30.0" layoutX="99.0" layoutY="22.0" stroke="WHITE" strokeLineJoin="ROUND" strokeType="INSIDE" width="600" />
+      <Label fx:id="lbmoviename" layoutX="200.0" layoutY="28.0" textFill="WHITE" />
+      <VBox fx:id="seatMapBox" spacing="5" layoutX="50" layoutY="70"/>
+      <Label fx:id="lbss" layoutX="800.0" layoutY="43.0" prefHeight="142.0" prefWidth="140.0" text="Selected Seats" />
+      <VBox fx:id="selectedSeatBox" layoutX="800.0" layoutY="100" prefHeight="300.0" prefWidth="140.0"/>
+      <Button layoutX="600" layoutY="500.0" mnemonicParsing="false" onAction="#Continue" text="Continue" />
+      <Button layoutX="250" layoutY="500.0" mnemonicParsing="false" text="Go Back" />
    </children>
 </AnchorPane>
