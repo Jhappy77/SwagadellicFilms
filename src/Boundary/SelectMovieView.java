@@ -1,7 +1,21 @@
 package Boundary;
 
 import java.io.IOException;
+<<<<<<< HEAD
 
+=======
+import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+import Controller.DatabaseManager;
+import Controller.MovieController;
+import Controller.SeatController;
+import Model.Movie;
+import Model.MovieScreening;
+import Model.MovieTheatre;
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,12 +23,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+<<<<<<< HEAD
 import javafx.scene.control.ChoiceBox;
+=======
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class SelectMovieView {
+<<<<<<< HEAD
 	
 	Stage window;
 	
@@ -40,6 +61,125 @@ public class SelectMovieView {
 		//Logic here can grab information from the database to put in Observablelists for list of movie theatres, movies and show times
 		//to show in choice boxes
 		initialize();
+=======
+	private MovieScreening showTime;
+	private List<Movie> MList;
+	private List<MovieTheatre> TList;
+	private List<MovieScreening> MSList;
+	private Movie m;
+	Stage window;
+	
+//	ObservableList<String> cbbtList ;
+//	ObservableList<String> cbbmList ;
+//	ObservableList<String> cbbsList ;
+	
+	ObservableList<String> cbbmList ;
+	ObservableList<String> cbbtList ;
+	ObservableList<String> cbbsList ;
+	
+	@FXML
+	private ComboBox<String> cbbm;
+	@FXML
+	private ComboBox<String> cbbt;
+	
+	@FXML
+	private ComboBox<String> cbbs;
+	
+	@FXML
+	private Label status;
+	
+	public SelectMovieView() throws ParseException {
+		 cbbm = new ComboBox<String>();
+		 cbbt = new ComboBox<String>();
+		 cbbs = new ComboBox<String>();
+		 cbbtList = FXCollections.observableArrayList();
+		 cbbmList = FXCollections.observableArrayList();
+		 cbbsList = FXCollections.observableArrayList();
+		 
+		 cbbt.setDisable(true);
+		 cbbs.setDisable(true);
+//		 
+		 cbbtList.removeAll(cbbtList);
+		 cbbmList.removeAll(cbbmList);
+		 cbbsList.removeAll(cbbsList);
+		 MList = DatabaseManager.getInstance().queryMovies();
+		 for(int i=0; i<MList.size(); i++)
+			 cbbmList.add(MList.get(i).getName());
+		 cbbm.getItems().addAll(cbbmList);
+//		 status.setText("Hello");
+//			 
+			
+//				
+				
+				
+//			}
+//			else
+//				cbbs.setDisable(true);
+//		 }
+//		 else
+//		 {
+//			 cbbs.setDisable(true);
+//			 cbbt.setDisable(true);
+//		 }
+		 
+		 
+		
+		 
+		 
+//		 MovieController.showTimes.add(showTime);
+//		//Logic here can grab information from the database to put in Observablelists for list of movie theatres, movies and show times
+//		//to show in choice boxes
+		initialize();
+		 
+	}
+	
+	@FXML
+	public void chooseTheatre(ActionEvent event)
+	{
+		String name = cbbm.getValue();
+		 if(name!=null)
+		 {
+			 status.setText("Movie chosen successfully");
+			 for(int i=0; i<MList.size(); i++)
+				 if(MList.get(i).getName().equals(name))
+					 m = MList.get(i);
+			 
+			 TList = DatabaseManager.getInstance().queryTheatresWithMovie(m.getId());
+			 for(int i=0; i<TList.size(); i++)
+				 cbbtList.add(TList.get(i).getName());
+			 cbbt.getItems().addAll(cbbtList);
+			 cbbt.setDisable(false);
+			 initialize();
+			
+		 }
+	}
+	
+	public void chooseScreening(ActionEvent event)
+	{
+		String TheatreName = cbbt.getValue();
+		
+		if(TheatreName!=null)
+		{
+			status.setText("Theatre chosen successfully");
+			MovieTheatre mt = null;
+			for(int i=0; i<TList.size(); i++)
+				if(TList.get(i).getName().equals(TheatreName))
+					mt = TList.get(i);
+//			System.out.println(mt.toString());
+			MSList = DatabaseManager.getInstance().queryScreeningsAtTheatre(m.getId(), mt.getId());
+			 for(int i=0; i<MSList.size(); i++)
+			 {
+				 LocalDateTime ldt = MSList.get(i).getMovieDate();
+				 DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+				 cbbsList.add(ldt.format(formatter));
+				 status.setText(ldt.format(formatter));
+			 }
+			 
+			 cbbs.getItems().addAll(cbbsList);
+			 cbbs.setDisable(false);
+			 initialize();
+		}
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 	}
 	
 	@FXML
@@ -48,11 +188,23 @@ public class SelectMovieView {
 		cbbm.setItems(cbbmList);
 		cbbs.setItems(cbbsList);	
 	}
+<<<<<<< HEAD
+=======
+	
+	public void begin(Stage s)
+	{
+		window = s;
+		perform();
+	}
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 
 	public void perform() {
 		
 		try {
+<<<<<<< HEAD
 			window= new Stage();
+=======
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 			Parent root =FXMLLoader.load(getClass().getResource("/Boundary/Selectmovie.fxml"));
 			Scene scene= new Scene(root);
 			window.setScene(scene);
@@ -67,15 +219,38 @@ public class SelectMovieView {
 	public void Continue(ActionEvent event) {
 		//Logic in here takes you to the seat map of each selection
 		//for now:
+<<<<<<< HEAD
 		SeatView sv = new SeatView();
 		sv.perform();
+=======
+		String time = cbbs.getValue();
+		 if(time!=null)
+		 {
+			 for(int i=0; i<MSList.size(); i++)
+			 {
+				 DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+				 if(time.equals(MSList.get(i).getMovieDate().format(formatter)))
+					 showTime = MSList.get(i);
+			 }
+		 }
+		 SeatController.theScreening = showTime;
+		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
+		SeatView sv = new SeatView();
+		sv.begin(window);
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 	}
 	
 	public void goBack(ActionEvent event) {
 		//logic for going to the previous window:
 		//for now:
+<<<<<<< HEAD
 		Menu m = new Menu();
 		m.perform();
+=======
+		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
+		Menu m = new Menu();
+		m.begin(window);
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 	}
 }
 

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<<<<<<< HEAD
+=======
+<?import javafx.scene.control.CheckBox?>
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -10,6 +14,7 @@
 <AnchorPane prefHeight="500.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.SignUpView">
    <children>
       <TextField fx:id="txtname" layoutX="76.0" layoutY="57.0" promptText="Name" />
+<<<<<<< HEAD
       <TextField fx:id="txtccn" layoutX="76.0" layoutY="280.0" promptText="Credit Card Number" />
       <TextField fx:id="txtusername" layoutX="76.0" layoutY="197.0" promptText="Username" />
       <TextField fx:id="txtemail" layoutX="76.0" layoutY="149.0" promptText="E-mail address" />
@@ -18,5 +23,19 @@
       <Button layoutX="114.0" layoutY="388.0" mnemonicParsing="false" onAction="#signUp" prefHeight="25.0" prefWidth="81.0" text="Sign Up" />
       <Button layoutX="113.0" layoutY="429.0" mnemonicParsing="false" onAction="#goBack" prefHeight="25.0" prefWidth="81.0" text="Go Back" />
       <Label fx:id="lbstatus" layoutX="54.0" layoutY="340.0" prefHeight="17.0" prefWidth="205.0" text="Status" textFill="#970000" />
+=======
+      <TextField fx:id="txtccn" layoutX="76.0" layoutY="353.0" promptText="Credit Card Number" />
+      <TextField fx:id="txtusername" layoutX="76.0" layoutY="238.0" promptText="Username" />
+      <TextField fx:id="txtemail" layoutX="76.0" layoutY="149.0" promptText="E-mail address" />
+      <DatePicker fx:id="dob" layoutX="63.0" layoutY="103.0" promptText="Date of Birth" />
+      <PasswordField fx:id="txtpassword" layoutX="76.0" layoutY="283.0" promptText="Password" />
+      <Button layoutX="116.0" layoutY="415.0" mnemonicParsing="false" onAction="#signUp" prefHeight="25.0" prefWidth="81.0" text="Sign Up" />
+      <Button layoutX="116.0" layoutY="453.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="25.0" prefWidth="81.0" text="Return" />
+      <Label fx:id="lbstatus" layoutX="39.0" layoutY="386.0" prefHeight="17.0" prefWidth="205.0" text="Status" textFill="#970000" />
+      <TextField fx:id="txtaddress" layoutX="76.0" layoutY="196.0" promptText="address" />
+      <CheckBox layoutX="90.0" layoutY="321.0" mnemonicParsing="false" onAction="#checkBox" text="Credit" />
+      <CheckBox mnemonicParsing="false" text="CheckBox" />
+      <CheckBox layoutX="172.0" layoutY="321.0" mnemonicParsing="false" onAction="#checkBox" text="Debit" />
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
    </children>
 </AnchorPane>

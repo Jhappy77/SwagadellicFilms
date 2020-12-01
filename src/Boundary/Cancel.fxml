@@ -16,5 +16,9 @@
       <Button layoutX="25.0" layoutY="160.0" mnemonicParsing="false" onAction="#goBack" text="Go Back" />
       <ChoiceBox fx:id="cbut" layoutX="84.0" layoutY="23.0" prefWidth="150.0" />
       <Label layoutX="18.0" layoutY="27.0" text="User Type" />
+<<<<<<< HEAD
+=======
+      <Label fx:id="cancelstatus" layoutX="67.0" layoutY="137.0" prefHeight="17.0" prefWidth="194.0" />
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
    </children>
 </AnchorPane>

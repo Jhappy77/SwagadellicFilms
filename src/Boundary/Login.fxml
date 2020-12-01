@@ -29,5 +29,9 @@
             <Font size="16.0" />
          </font>
       </Label>
+<<<<<<< HEAD
+=======
+      <Button layoutX="233.0" layoutY="262.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="14.0" prefWidth="53.0" text="Return" />
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
    </children>
 </AnchorPane>
