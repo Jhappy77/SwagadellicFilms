@@ -57,13 +57,9 @@ public class DatabaseManager {
 		return theDatabaseManager;
 	}
 	
-	public List<Integer> queryBookedSeats(String screeningId) {
-		return null;
-	}
-	
 	// How do I get screening_id and user_id from this?
 	public void saveTicket(Ticket ticketToAdd) throws IOException, JSONException {  
-        processUrl("save-ticket");
+        processMethod("save-ticket", "POST");
         Map<String,String> arguments = new HashMap<>();
         arguments.put("ticket_id", ticketToAdd.getId());
         arguments.put("seat_no", Integer.toString(ticketToAdd.getSeatNumber()));
@@ -72,9 +68,16 @@ public class DatabaseManager {
         processPost(arguments);
 	}
 	
+	public void removeTicket(String ticketId) throws IOException {
+		processMethod("delete-ticket", "DELETE");
+		Map<String, String> arguments = new HashMap<>();
+		arguments.put("pk", ticketId);
+		processPost(arguments);
+	}
+	
 	// need to implement payment first
 	public void savePayment(Payment thePayment) throws IOException, JSONException {
-        processUrl("save-payment");
+		processMethod("save-payment", "POST");
         Map<String,String> arguments = new HashMap<>();
         arguments.put("amount", String.valueOf(thePayment.getAmount()));
         arguments.put("user_id", thePayment.getID()); // should this be payment ID?
@@ -83,7 +86,7 @@ public class DatabaseManager {
 	
 	// need to implement registereduser first
 	public void saveRegisteredUser(RegisteredUser userInfo) throws JSONException, IOException {
-		processUrl("registered-user");
+		processMethod("registered-user", "POST");
 		Map<String,String> arguments = new HashMap<>();
 		arguments.put("name", userInfo.getName()); //
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
@@ -95,7 +98,7 @@ public class DatabaseManager {
 	
 	// need to implement
 	public void saveCreditInfo(RegisteredUser regUser, CreditMethod credit) throws IOException, JSONException {
-		processUrl("save-credit");
+		processMethod("save-credit", "POST");
 		Map<String,String> arguments = new HashMap<>();
 		arguments.put("user_id", regUser.getEmail()); //
 		arguments.put("credit_number",  String.valueOf(credit.getNumber())); //
@@ -104,7 +107,7 @@ public class DatabaseManager {
 	
 	// need to implement
 	public void saveDebitInfo(RegisteredUser regUser, DebitMethod debit) throws JSONException, IOException {
-		processUrl("save-debit");
+		processMethod("save-debit", "POST");
 		Map<String,String> arguments = new HashMap<>();
 		arguments.put("user_id", regUser.getEmail()); //
 		arguments.put("debit_number", String.valueOf(debit.getNumber())); //
@@ -113,10 +116,20 @@ public class DatabaseManager {
 	
 	public boolean validateLogin(String username, String password) throws IOException, JSONException {
 		String URL = baseURL + "login?email=" + username + "&password=" + password;
-		JSONObject jsonFile = readJsonFromUrl(URL);
-		if(!(jsonFile.has("Login Error")))
-			return false;
-		return true;
+		JSONObject j = readJsonFromUrl(URL);
+		if(j.get("email").equals(username))
+			return true;
+		return false;
+	}
+	
+	public void queryForRegisteredUser(String username, String password) throws JSONException, IOException {
+		String URL = baseURL + "login?email=" + username + "&password=" + password;
+		JSONObject j = readJsonFromUrl(URL);
+		String name = j.getString("name");
+		String birthdate = j.getString("birthdate");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = format.parse(birthdate);
+		RegisteredUser(username, password, username, date, name);
 	}
 	
 	public List<Movie> queryMovies() throws ParseException {
@@ -238,6 +251,19 @@ public class DatabaseManager {
 		return screeningList;
 	}
 	
+	public List<Integer> queryBookedSeats(String screeningId) {
+		String URL = baseURL + "?format=json&screeningId=" + screeningId;
+		List<Integer> bookedSeats = new ArrayList<Integer>();
+        try {
+            JSONArray j = readJsonArrayFromUrl(URL);
+            for(int i = 0; i < j.length(); i++)
+            	bookedSeats.add(j.getInt(i));
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+        return bookedSeats;
+	}
+	
 	public Ticket queryTicket(String ticketId) {
         String URL = baseURL + "ticket?format=json&ticketId=" + ticketId;
         try {
@@ -272,12 +298,14 @@ public class DatabaseManager {
 	        return false;
 	    }
 	
-	public void processUrl(String ext) throws IOException {
+	public void processMethod(String ext, String method) throws IOException {
         apiUrl = new URL(baseURL + ext);
         URLConnection con = apiUrl.openConnection();
         connection = (HttpURLConnection)con;
-        connection.setRequestMethod("POST");
+        connection.setRequestMethod(method);
         connection.setDoOutput(true);
+        if (method.equals("DELETE"))
+        	connection.connect();
 	}
 	 
 	public void processPost(Map<String,String> arguments) throws IOException {
@@ -346,7 +374,7 @@ public class DatabaseManager {
 //			}
 //		
 //			
-//	        inst.processUrl("save-debit");
+//	        inst.processMethod("save-debit", "POST");
 //	        Map<String,String> arguments = new HashMap<>();
 //	        arguments.put("user_id", "johncena@shaw.ca");
 //	        arguments.put("debit_number", "99");

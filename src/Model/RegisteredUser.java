@@ -22,6 +22,14 @@ public class RegisteredUser implements User{
 		this.setMethod(method);
 //		userID = id;
 	}
+	
+	public RegisteredUser(String username, String password, String email, Date birthdate, String name) {
+        this.setUsername(username);
+        this.setPassword(password);
+        this.setEmail(email);
+        this.setName(name);
+        this.setDateOfBirth(birthdate);
+    }
 
 
 	@Override
