@@ -1,7 +1,12 @@
 package Model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
+import java.util.Locale;
+
+import Boundary.Seat;
 
 // UPDATE: removed screenTime because movieDate covers both time and date
 public class MovieScreening {
@@ -11,6 +16,8 @@ public class MovieScreening {
 	private String movieName;
 	private String id;
 	private ArrayList<Seat> seats;
+	private String timeString;
+	private String shorthandName;
 	
 	public MovieScreening(LocalDateTime date, String tName, String mName, String i) {
 		seats = new ArrayList<Seat>();
@@ -18,8 +25,20 @@ public class MovieScreening {
 		setTheatreName(tName);
 		setMovieName(mName);
 		setId(i);
+		setShorthandName();
 	}
 
+	public void setShorthandName() {
+		timeString = movieDate.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH)+" "+movieDate.getDayOfMonth() + "@" + movieDate.toLocalTime().format(DateTimeFormatter.ISO_TIME);
+		shorthandName = movieName + " on " + timeString + " ("+theatreName+")";
+	}
+	
+	
+	@Override
+	public String toString() {
+		return shorthandName;
+	}
+	
 	public void addSeat(Seat s)
 	{
 		seats.add(s);

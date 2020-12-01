@@ -1,0 +1,31 @@
+Button:seat--selected{
+    -fx-background-color: green;
+    background-color: green;
+}
+
+Button:seat--unselected{
+    -fx-background-color: cyan;
+    background-color: cyan;
+}
+
+Button:seat--unavailable{
+    -fx-background-color: red;
+    background-color: red;
+}
+
+
+
+.Button:seat--selected{
+    -fx-background-color: green;
+    background-color: green;
+}
+
+.Button:seat--unselected{
+    -fx-background-color: cyan;
+    background-color: cyan;
+}
+
+.Button:seat--unavailable{
+    -fx-background-color: red;
+    background-color: red;
+}

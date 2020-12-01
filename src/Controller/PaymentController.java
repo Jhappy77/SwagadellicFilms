@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 import org.json.JSONException;
 
+import Boundary.Seat;
 import Model.Cart;
 import Model.FinancialInstitution;
 import Model.Payment;
 import Model.PaymentMethod;
-import Model.Seat;
 import Model.Ticket;
 import Model.User;
 

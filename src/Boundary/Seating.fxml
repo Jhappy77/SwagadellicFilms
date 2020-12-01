@@ -5,18 +5,17 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="450.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.SeatView">
+<AnchorPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.SeatView" stylesheets="Boundary/Style.css">
    <children>
-      <Label fx:id="lblBookedSeatsECR" layoutX="293.0" layoutY="113.0" prefHeight="17.0" prefWidth="66.0" />
-      <Label fx:id="lblAvailableSeatsECR1" layoutX="293.0" layoutY="142.0" prefHeight="17.0" prefWidth="66.0" />
-      <Label fx:id="lblHeaderECR" layoutX="24.0" layoutY="28.0" prefHeight="17.0" prefWidth="340.0" />
-      <Rectangle fx:id="screenShapeECR" height="30.0" layoutX="99.0" layoutY="22.0" stroke="WHITE" strokeLineJoin="ROUND" strokeType="INSIDE" width="175.0" />
-      <Label fx:id="lbscreen" layoutX="165.0" layoutY="28.0" text="SCREEN" textFill="WHITE" />
-      <Label fx:id="lbmoviename" layoutX="31.0" layoutY="208.0" text="Movie Name" />
-      <Label fx:id="lbss" layoutX="295.0" layoutY="43.0" prefHeight="142.0" prefWidth="140.0" text="Selected Seats" />
-      <Button layoutX="293.0" layoutY="351.0" mnemonicParsing="false" onAction="#Continue" text="Continue" />
-      <Button layoutX="80.0" layoutY="351.0" mnemonicParsing="false" text="Go Back" />
-      <Label fx:id="lbcount" layoutX="265.0" layoutY="208.0" prefHeight="17.0" prefWidth="161.0" text="Number of Seats Booked" />
+      <Rectangle fx:id="screenShapeECR" height="30.0" layoutX="99.0" layoutY="22.0" stroke="WHITE" strokeLineJoin="ROUND" strokeType="INSIDE" width="600" />
+      <Label fx:id="lbmoviename" layoutX="200.0" layoutY="28.0" textFill="WHITE" />
+      <VBox fx:id="seatMapBox" spacing="5" layoutX="50" layoutY="70"/>
+      <Label fx:id="lbss" layoutX="800.0" layoutY="43.0" prefHeight="142.0" prefWidth="140.0" text="Selected Seats" />
+      <VBox fx:id="selectedSeatBox" layoutX="800.0" layoutY="100" prefHeight="300.0" prefWidth="140.0"/>
+      <Button layoutX="600" layoutY="500.0" mnemonicParsing="false" onAction="#Continue" text="Continue" />
+      <Button layoutX="250" layoutY="500.0" mnemonicParsing="false" text="Go Back" />
    </children>
 </AnchorPane>
