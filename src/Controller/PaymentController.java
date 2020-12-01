@@ -14,14 +14,14 @@ import Model.Ticket;
 import Model.User;
 
 public class PaymentController {
-	public static ArrayList<Ticket> tickets;
+//	public static ArrayList<Ticket> tickets;
 	public static ArrayList<Seat> bookedSeats;
-	private User u;
-	
-	public static void addPayment(User u)
-	{
-		
-	}
+//	private User u;
+//	
+//	public static void addPayment(User u)
+//	{
+//		
+//	}
 	
 	public static int searchPaymentID(String id)
 	{
@@ -31,6 +31,7 @@ public class PaymentController {
 	/**
 	 * Searches for a ticket by ID. If it doesn't find it or if it is not refundable,
 	 * returns an exception.
+	 * @throws TicketException 
 	 */
 	public static Ticket searchRefundableTicket(String id) throws TicketException
 	{
@@ -72,7 +73,7 @@ public class PaymentController {
 	 * This is a simple abstraction of what would actually happen.
 	 * @param method
 	 */
-	public static void payTickets(PaymentMethod method) throws PaymentException
+	public static boolean payTickets(PaymentMethod method) throws PaymentException
 	{
 		Cart theCart = Cart.getInstance();
 		Payment thePayment = theCart.makePayment(method);
@@ -80,9 +81,10 @@ public class PaymentController {
 		if(thePayment.getIsProcessed()) {
 			DatabaseManager dbm = DatabaseManager.getInstance();
 			try {
-				dbm.savePayment(thePayment);
+//				dbm.savePayment(thePayment);
 				theCart.saveTickets();
 				theCart.clear();
+				return true;
 			} catch (JSONException e) {
 				
 				
@@ -101,6 +103,7 @@ public class PaymentController {
 		}else {
 			throw new PaymentException("Payment was not accepted.");
 		}
+		return false;
 	}
 	
 	/**
@@ -113,9 +116,9 @@ public class PaymentController {
 		theCart.removeTicket(id);
 	}
 	
-	public void setUser(User u)
-	{
-		this.u = u;
-	}
+//	public void setUser(User u)
+//	{
+//		this.u = u;
+//	}
 	
 }

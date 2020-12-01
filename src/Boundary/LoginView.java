@@ -52,9 +52,10 @@ public class LoginView implements View{
 		if(txtusername.getText().contentEquals("user") && txtpassword.getText().equals("pass")) {
 //			if(DatabaseManager.getInstance().validateLogin(txtusername.getText(), txtpassword.getText())){
 				lbstatus.setText("Login Success");
-//			else
-//				lbstatus.setText("Login failed, try again");
+			
 		}
+		else
+			lbstatus.setText("Login failed, try again");
 //		}
 		if(lbstatus.getText().contentEquals("Login Success")) {
 			SpecialMenu m = new SpecialMenu();

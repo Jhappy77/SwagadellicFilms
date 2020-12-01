@@ -20,6 +20,11 @@ public class Cart {
 		return cart;
 	}
 	
+	public List<Ticket> getTickets()
+	{
+		return tickets;
+	}
+	
 	public Payment makePayment(PaymentMethod pm) { 
 		float total = 0;
 		for(Ticket t: tickets) {

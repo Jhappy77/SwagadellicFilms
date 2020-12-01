@@ -49,7 +49,7 @@ public class SpecialMenu implements View{
 		public void cancelTicket(ActionEvent event) {}
 		
 		public void payAnnualFee(ActionEvent event) {
-			PaymentView p= new PaymentView(null, true, true);
+			PaymentView p= new PaymentView(true, true);
 			p.perform();
 		}
 

@@ -11,7 +11,7 @@ import Model.Ticket;
 public class SeatController {
 	
 	// The screening that is currently selected
-	private MovieScreening theScreening;
+	public static MovieScreening theScreening;
 	
 	
 	public SeatController() {
@@ -47,9 +47,9 @@ public class SeatController {
 		return dbm.queryBookedSeats(theScreening.getId());
 	}
 	
-	public void addSeatsToCart(List<Integer> ids)
+	public void addSeatsToCart(List<String> ids)
 	{
-		for(int seatId: ids) {
+		for(String seatId: ids) {
 			// Generates a random Ticket ID
 			String ticketId = UUID.randomUUID().toString().substring(0, 20);
 			// Creates a ticket

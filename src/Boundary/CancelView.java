@@ -3,6 +3,7 @@ package Boundary;
 import java.io.IOException;
 
 import Controller.DatabaseManager;
+import Model.Ticket;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -65,15 +66,8 @@ public class CancelView {
 	
 	public void confirmCancellation(ActionEvent event) {
 		if(cbut.getValue().equals("Guest")) {
-			if(DatabaseManager.getInstance().queryTicket(txttid.getText()))
-			{
-				PaymentView p= new PaymentView(null, true, false);
-				p.perform();
-			}
-			else
-			{
-				cancelstatus.setText("Ticket id not found");
-			}
+			Ticket t = DatabaseManager.getInstance().queryTicket(txttid.getText());
+			
 		}
 		else {
 			//For registered user add logic to make cancellation then take to the main menu

@@ -4,20 +4,29 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.StringJoiner;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,9 +43,9 @@ import Model.Ticket;
 
 public class DatabaseManager {
 	
-	private URL apiUrl;
-	private String baseURL;
-	private HttpURLConnection connection;
+	private static URL apiUrl;
+	private static String baseURL;
+	private static HttpURLConnection connection;
 	private static DatabaseManager theDatabaseManager;
 	
 	private DatabaseManager() {
@@ -54,26 +63,28 @@ public class DatabaseManager {
 	}
 	
 	// How do I get screening_id and user_id from this?
-	public void saveTicket(Ticket ticketToAdd) throws IOException, JSONException {
-		String URL = baseURL + "save-ticket";
-		JSONArray jsonArray = new JSONArray();
-        JSONObject objItem = readJsonFromUrl(URL);
-        objItem.put("ticket_id", ticketToAdd.getId());
-        objItem.put("seat_no", ticketToAdd.getScreening().getSeats().get(0));
-        objItem.put("screening_id", ticketToAdd.getScreening().getId()); //
-//        objItem.put("user_id", ticketToAdd.get); //no need for id here cause anonymous user can use this method as well
-        //delete user_id from database
-        jsonArray.put(objItem);
+	public void saveTicket(Ticket ticketToAdd) throws IOException, JSONException {  
+        processUrl("save-ticket");
+        Map<String,String> arguments = new HashMap<>();
+        arguments.put("ticket_id", ticketToAdd.getId());
+        arguments.put("seat_no", String.valueOf(ticketToAdd.getSeatNumber()));
+        arguments.put("screening_id", ticketToAdd.getScreening().getId());
+        // PUT USER ID
+        processPost(arguments);
 	}
 	
 	// need to implement payment first
 	public void savePayment(Payment thePayment) throws IOException, JSONException {
-		String URL = baseURL + "save-payment";
-		JSONArray jsonArray = new JSONArray();
-        JSONObject objItem = readJsonFromUrl(URL);
-        objItem.put("amount", thePayment.getAmount()); //
-        objItem.put("user_id",  thePayment.getID()); //
-        jsonArray.put(objItem);
+        URL url = new URL(baseURL + "save-payment");
+        URLConnection con = url.openConnection();
+        connection = (HttpURLConnection)con;
+        connection.setRequestMethod("POST");
+        connection.setDoOutput(true);
+        
+        Map<String,String> arguments = new HashMap<>();
+        arguments.put("amount", String.valueOf(thePayment.getAmount()));
+        arguments.put("user_id", thePayment.getID()); // should this be payment ID?
+        processPost(arguments);
 	}
 	
 	// need to implement registereduser first
@@ -185,33 +196,44 @@ public class DatabaseManager {
 		List<MovieScreening> screeningList = new ArrayList<MovieScreening>();
 		try {
 			JSONArray j = readJsonArrayFromUrl(URL);
-			for(int k = 0; k < j.length(); k++) {
-				int id = j.getJSONObject(k).getInt("id");
-				String screening_time = j.getJSONObject(k).getString("screening_time");
-				LocalDateTime ldt = LocalDateTime.parse(screening_time);
-				
-				// find Movie
-				List<Movie> m = queryMovies();
-				String movieName = "";
-				for(int i = 0; i < m.size(); i++) {
-					if(m.get(i).getId().contentEquals(movieId))
-						movieName = m.get(i).getName();
-					continue;
+			for(int i = 0; i < j.length(); i++) {
+				int DBMovieId = j.getJSONObject(i).getJSONObject("movie_id").getInt("id");
+				String Mid = String.valueOf(DBMovieId);
+				int DBTheatreId = j.getJSONObject(i).getJSONObject("theatre_id").getInt("id");
+				String Tid = String.valueOf(DBTheatreId);
+				if(movieId.equals(Mid) && theatreId.equals(Tid)) {
+					String screening_time = j.getJSONObject(i).getString("screening_time");
+					String date1 = "", date2 = "";
+					int k =0 ;
+					while(k < screening_time.length())
+					{
+						char c = screening_time.charAt(k);
+						if(c=='T')
+							break;
+						date1 += c;
+						k++;
+					}
+					
+					k++;
+					
+//					String date = "";
+//					for(int k=0; k<screening_time.length(); k++)
+//					{
+//						if(screening_time.charAt(k) != 'T')
+//							date+=screening_time.charAt(k);
+//					}
+					
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss-HH:mm");
+					LocalDateTime ldt = LocalDateTime.parse(date.toString(), formatter);
+					String theatre_name = j.getJSONObject(i).getJSONObject("theatre_id").getString("theatre_name");
+					String movie_name = j.getJSONObject(i).getJSONObject("movie_id").getString("movie_name");
+					String id = j.getJSONObject(i).getString("id");
+					MovieScreening ms = new MovieScreening(ldt, theatre_name, movie_name, id);
+					screeningList.add(ms);
 				}
-				
-				// find Theatre
-				List<MovieTheatre> mt = queryTheatresWithMovie(movieId);
-				String theatreName = "";
-				for(int i = 0; i < mt.size(); i ++) {
-					if(mt.get(i).getId().contentEquals(theatreId))
-						theatreName = mt.get(i).getName();
-					continue;
-				}
-				
-				MovieScreening ms = new MovieScreening(ldt, theatreName, movieName, String.valueOf(id));
-				screeningList.add(ms);
 			}
-		} catch (IOException | JSONException | ParseException e) {
+			
+		} catch (IOException | JSONException e) {
 			e.printStackTrace();
 		}
 		return screeningList;
@@ -221,8 +243,16 @@ public class DatabaseManager {
         String URL = baseURL + "ticket?format=json&ticketId=" + ticketId;
         try {
             JSONObject j = readJsonFromUrl(URL);
-            if (j.has(ticketId)) {
-               Ticket t = new Ticket(ticketId, movieScreening);
+            if (j.get("ticket_id").equals(ticketId)) {
+            	String screening_time = j.getJSONObject("screening_id").getString("screening_time");
+            	LocalDateTime ldt = LocalDateTime.parse(screening_time);
+            	String screening_id = j.getJSONObject("screening_id").getString("id");
+            	String movie_name = j.getJSONObject("screening_id").getJSONObject("movie_id").getString("movie_name");
+            	String theatre_name = j.getJSONObject("screening_id").getJSONObject("theatre_id").getString("theatre_name");
+            	MovieScreening ms = new MovieScreening(ldt, theatre_name, movie_name, screening_id);
+            	String seat_num = j.getString("seat_no");
+            	Ticket t = new Ticket(ticketId, ms, seat_num);
+            	return t;
             }
         } catch (IOException | JSONException e) {
             e.printStackTrace();
@@ -243,6 +273,29 @@ public class DatabaseManager {
 	        return false;
 	    }
 	
+	public static void processUrl(String ext) throws IOException {
+        apiUrl = new URL(baseURL + ext);
+        URLConnection con = apiUrl.openConnection();
+        connection = (HttpURLConnection)con;
+        connection.setRequestMethod("POST");
+        connection.setDoOutput(true);
+	}
+	 
+	public static void processPost(Map<String,String> arguments) throws IOException {
+        StringJoiner sj = new StringJoiner("&");
+        for(Map.Entry<String,String> entry : arguments.entrySet())
+            sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "=" + URLEncoder.encode(entry.getValue(), "UTF-8"));
+        byte[] out = sj.toString().getBytes(StandardCharsets.UTF_8);
+        int length = out.length;
+        
+        connection.setFixedLengthStreamingMode(length);
+        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+        connection.connect();
+        try(OutputStream os = connection.getOutputStream()) {
+            os.write(out);
+        }
+	}
+	 
 	public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
 		InputStream is = new URL(url).openStream();
 		try {
@@ -279,23 +332,13 @@ public class DatabaseManager {
 	
 	
 	// USE THIS FOR TESTING
-//		public static void main(String[] args) throws ParseException {
+//		public static void main(String[] args) throws ParseException, IOException {
 //			DatabaseManager inst = DatabaseManager.getInstance();
 //			try {
 //				System.out.println("Testing");
-//				JSONArray j = inst.readJsonArrayFromUrl("https://calm-shelf-23678.herokuapp.com/swagDB/ticket?format=json&ticketId=1");
+//				JSONArray j = inst.readJsonArrayFromUrl("https://calm-shelf-23678.herokuapp.com/swagDB/movies?format=json");
 //				System.out.println(j.length());
 //				System.out.println(j);
-//				for(int i = 0; i < j.length(); i++) {
-//					int id = j.getJSONObject(i).getInt("id");
-//					String movie_name = j.getJSONObject(i).getString("screening_time");
-//					String genre = j.getJSONObject(i).getString("genre");
-//					String release_date = j.getJSONObject(i).getString("release_date");
-//					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//					Date date = format.parse(release_date);
-//					MovieScreening m = new MovieScreening(movie_name, genre, String.valueOf(id), date);
-//					System.out.println(m.getGenre() + "   " + m.getId() + "   " + m.getName() + "   " + m.getReleaseDate());
-//				}
 //			} catch (JSONException e) {
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();
@@ -303,5 +346,16 @@ public class DatabaseManager {
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();
 //			}
+//		}
+			
+//	        processUrl("save-ticket");
+//			
+//	        Map<String,String> arguments = new HashMap<>();
+//	        arguments.put("ticket_id", "99");
+//	        arguments.put("seat_no", "99");
+//	        arguments.put("screening_id", "99");
+//	        // PUT USER ID
+//	        
+//	        processPost(arguments);
 //		}
 }

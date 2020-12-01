@@ -1,11 +1,16 @@
 package Boundary;
 
 import java.io.IOException;
-import java.util.ArrayList;
+//import java.util.ArrayList;
+import java.util.UUID;
 
 import Controller.PaymentController;
-import Model.MovieScreening;
+//import Controller.PaymentController;
+import Controller.SeatController;
+import Model.Cart;
+//import Model.MovieScreening;
 import Model.Seat;
+import Model.Ticket;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +24,7 @@ import javafx.stage.Stage;
 public class SeatView implements View{
 	
 	Stage window;
-	private MovieScreening showTime;
+//	private MovieScreening SeatController.theScreening;
 	@FXML
 	private CheckBox A1;
 	@FXML
@@ -89,9 +94,10 @@ public class SeatView implements View{
 	@FXML
 	private Label lbcount;
 	
-	public SeatView(MovieScreening ms) {
-		showTime = ms;
-	}
+//	public SeatView(MovieScreening ms) {
+//		SeatController.theScreening = ms;
+//	}
+	
 	
 	public void begin(Stage s)
 	{
@@ -121,175 +127,285 @@ public class SeatView implements View{
 			count++;
 			message += "A1\n";
 			Seat seat = new Seat("A1");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		
 		if (A2.isSelected()) {
 			count++;
 			message += "A2\n";
 			Seat seat = new Seat("A2");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (A3.isSelected()) {
 			count++;
 			message += "A3\n";
 			Seat seat = new Seat("A3");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (A4.isSelected()) {
 			count++;
 			message += "A4\n";
 			Seat seat = new Seat("A4");
-			showTime.addSeat(seat);
-			
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (A5.isSelected()) {
 			count++;
 			message += "A5\n";
 			Seat seat = new Seat("A5");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (A6.isSelected()) {
 			count++;
 			message += "A6\n";
 			Seat seat = new Seat("A6");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (A7.isSelected()) {
 			count++;
 			message += "A7\n";
 			Seat seat = new Seat("A7");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		
 		if (B1.isSelected()) {
 			count++;
 			message += "B1\n";
 			Seat seat = new Seat("B1");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (B2.isSelected()) {
 			count++;
 			message += "B2\n";
 			Seat seat = new Seat("B2");
-			showTime.addSeat(seat);
-			
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (B3.isSelected()) {
 			count++;
 			message += "B3\n";
 			Seat seat = new Seat("B3");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (B4.isSelected()) {
 			count++;
 			message += "B4\n";
 			Seat seat = new Seat("B4");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (B5.isSelected()) {
 			count++;
 			message += "B5\n";
 			Seat seat = new Seat("B5");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (B6.isSelected()) {
 			count++;
 			message += "B6\n";
 			Seat seat = new Seat("B6");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (B7.isSelected()) {
 			count++;
 			message += "B7\n";
 			Seat seat = new Seat("B7");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		
 		if (C1.isSelected()) {
 			count++;
 			message += "C1\n";
 			Seat seat = new Seat("C1");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (C2.isSelected()) {
 			count++;
 			message += "C2\n";
 			Seat seat = new Seat("C2");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (C3.isSelected()) {
 			count++;
 			message += "C3\n";
 			Seat seat = new Seat("C3");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (C4.isSelected()) {
 			count++;
 			message += "C4\n";
 			Seat seat = new Seat("C4");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (C5.isSelected()) {
 			count++;
 			message += "C5\n";
 			Seat seat = new Seat("C5");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (C6.isSelected()) {
 			count++;
 			message += "C6\n";
 			Seat seat = new Seat("C6");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (C7.isSelected()) {
 			count++;
 			message += "C7\n";
 			Seat seat = new Seat("C7");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		
 		if (D1.isSelected()) {
 			count++;
 			message += "D1\n";
 			Seat seat = new Seat("D1");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (D2.isSelected()) {
 			count++;
 			message += "D2\n";
 			Seat seat = new Seat("D2");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (D3.isSelected()) {
 			count++;
 			message += "D3\n";
 			Seat seat = new Seat("D3");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (D4.isSelected()) {
 			count++;
 			message += "D4\n";
 			Seat seat = new Seat("D4");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (D5.isSelected()) {
 			count++;
 			message += "D5\n";
 			Seat seat = new Seat("D5");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (D6.isSelected()) {
 			count++;
 			message += "D6\n";
 			Seat seat = new Seat("D6");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		if (D7.isSelected()) {
 			count++;
 			message += "D7\n";
 			Seat seat = new Seat("D7");
-			showTime.addSeat(seat);
+			SeatController.theScreening.addSeat(seat);
+			String ticketId = UUID.randomUUID().toString().substring(0, 20);
+			Ticket t = new Ticket(ticketId, SeatController.theScreening, seat.getSeatID());
+			PaymentController.bookedSeats.add(seat);
+			Cart.getInstance().addTicket(t);
 		}
 		lbss.setText(message);
 		lbcount.setText("Number of Seats Booked: "+ count);
@@ -297,7 +413,7 @@ public class SeatView implements View{
 	
 	public void Continue(ActionEvent event) {
 		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
-		PaymentView p= new PaymentView(showTime, false, false);
+		PaymentView p= new PaymentView(false, false);
 		p.begin(window);
 	}
 	

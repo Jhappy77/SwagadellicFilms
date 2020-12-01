@@ -8,6 +8,8 @@ import org.json.JSONException;
 import Controller.DatabaseManager;
 import Controller.MovieController;
 import Controller.PaymentController;
+import Controller.PaymentException;
+import Model.Cart;
 import Model.CreditMethod;
 import Model.DebitMethod;
 import Model.FinancialInstitution;
@@ -49,12 +51,11 @@ public class PaymentView implements View{
 	@FXML
 	private TextField txtcn;
 	
-	public PaymentView(MovieScreening ms, boolean fee, boolean refund) {
+	public PaymentView(boolean fee, boolean refund) {
 		this.refund = refund;
 		this.fee = fee;
 		price = 0;
 		paymentID = 0;
-		MovieController.showTimes.add(ms);
 		 cbct = new ChoiceBox<String>();
 		 cbctList = FXCollections.observableArrayList("Credit Card","Debit Card");
 		 initialize();
@@ -78,53 +79,34 @@ public class PaymentView implements View{
 		
 	}
 	
-	public void confirmPayment(ActionEvent event) throws IOException, JSONException {
+	public void confirmPayment(ActionEvent event) throws IOException, JSONException, PaymentException {
 		if(!fee)
-			{
+		{
 			String paymentType = cbct.getValue();
 			String cardNumber = txtcn.getText();
 			if(paymentType.equals("Credit Card"))
 			{
 				PaymentMethodComponent pmc = new PaymentMethodComponent();
 				pmc.setPaymentMethod(new CreditMethod(Integer.parseInt(cardNumber)));
-				for(int i=0; i<MovieController.showTimes.size(); i++)
-				{
-					Ticket t = new Ticket(Integer.toString(i), MovieController.showTimes.get(i));
-					PaymentController.tickets.add(t);
-					price += t.getPrice();
-				}
-				Payment p = FinancialInstitution.processPayment(new Payment(Integer.toString(PaymentView.paymentID),  price, pmc.getMethod()));
-				PaymentView.paymentID++;
-				if(p.getProcess())
+				if(PaymentController.payTickets(pmc.getMethod()))
 				{
 					amount.setText(Float.toString(price));
 					paymentstatus.setText("Amount paid successully");
-					DatabaseManager.getInstance().savePayment(p);
 				}
 				else
 					paymentstatus.setText("Credit card denied");
-				
 			}
 			else
 			{
 				PaymentMethodComponent pmc = new PaymentMethodComponent();
 				pmc.setPaymentMethod(new DebitMethod(Integer.parseInt(cardNumber)));
-				for(int i=0; i<MovieController.showTimes.size(); i++)
-				{
-					Ticket t = new Ticket(Integer.toString(i), MovieController.showTimes.get(i));
-					PaymentController.tickets.add(t);
-					price += t.getPrice();
-				}
-				Payment p = FinancialInstitution.processPayment(new Payment(Integer.toString(PaymentView.paymentID),  price, pmc.getMethod()));
-				PaymentView.paymentID++;
-				if(p.getProcess())
+				if(PaymentController.payTickets(pmc.getMethod()))
 				{
 					amount.setText(Float.toString(price));
 					paymentstatus.setText("Amount paid successully");
-					DatabaseManager.getInstance().savePayment(p);
 				}
 				else
-					paymentstatus.setText("Debit card denied");
+					paymentstatus.setText("Credit card denied");
 			}
 		}
 		else if(fee && refund)

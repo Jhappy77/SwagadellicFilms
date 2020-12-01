@@ -27,7 +27,7 @@ public class MovieApp extends Application {
 
     public static void main(String[] args) {
     	MovieController.showTimes = new ArrayList<MovieScreening>();
-    	PaymentController.tickets = new ArrayList<Ticket>();
+//    	PaymentController.tickets = new ArrayList<Ticket>();
     	PaymentController.bookedSeats = new ArrayList<Seat>();
         launch(args);
     }
