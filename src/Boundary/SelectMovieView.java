@@ -1,9 +1,6 @@
 package Boundary;
 
 import java.io.IOException;
-<<<<<<< HEAD
-
-=======
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,7 +12,6 @@ import Controller.SeatController;
 import Model.Movie;
 import Model.MovieScreening;
 import Model.MovieTheatre;
->>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,45 +19,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-<<<<<<< HEAD
-import javafx.scene.control.ChoiceBox;
-=======
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
->>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class SelectMovieView {
-<<<<<<< HEAD
-	
-	Stage window;
-	
-	ObservableList<String> cbbtList ;
-	ObservableList<String> cbbmList ;
-	ObservableList<String> cbbsList ;
-	
-	@FXML
-	private ChoiceBox cbbt;
-	@FXML
-	private ChoiceBox cbbm;
-	
-	@FXML
-	private ChoiceBox cbbs;
-	
-	public SelectMovieView() {
-		 cbbt = new ChoiceBox();
-		 cbbm = new ChoiceBox();
-		 cbbs = new ChoiceBox();
-		 cbbtList = FXCollections.observableArrayList("Theatre 1","Theatre 2");
-		 cbbmList = FXCollections.observableArrayList("Movie 1","Movie 2");
-		 cbbsList = FXCollections.observableArrayList("10:00 Am","2:00 Pm");
-		//Logic here can grab information from the database to put in Observablelists for list of movie theatres, movies and show times
-		//to show in choice boxes
-		initialize();
-=======
+
 	private MovieScreening showTime;
 	private List<Movie> MList;
 	private List<MovieTheatre> TList;
@@ -179,7 +145,6 @@ public class SelectMovieView {
 			 cbbs.setDisable(false);
 			 initialize();
 		}
->>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 	}
 	
 	@FXML
@@ -188,23 +153,17 @@ public class SelectMovieView {
 		cbbm.setItems(cbbmList);
 		cbbs.setItems(cbbsList);	
 	}
-<<<<<<< HEAD
-=======
+
 	
 	public void begin(Stage s)
 	{
 		window = s;
 		perform();
 	}
->>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 
 	public void perform() {
 		
 		try {
-<<<<<<< HEAD
-			window= new Stage();
-=======
->>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 			Parent root =FXMLLoader.load(getClass().getResource("/Boundary/Selectmovie.fxml"));
 			Scene scene= new Scene(root);
 			window.setScene(scene);
@@ -219,10 +178,6 @@ public class SelectMovieView {
 	public void Continue(ActionEvent event) {
 		//Logic in here takes you to the seat map of each selection
 		//for now:
-<<<<<<< HEAD
-		SeatView sv = new SeatView();
-		sv.perform();
-=======
 		String time = cbbs.getValue();
 		 if(time!=null)
 		 {
@@ -238,20 +193,15 @@ public class SelectMovieView {
 		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
 		SeatView sv = new SeatView();
 		sv.begin(window);
->>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 	}
 	
 	public void goBack(ActionEvent event) {
 		//logic for going to the previous window:
 		//for now:
-<<<<<<< HEAD
-		Menu m = new Menu();
-		m.perform();
-=======
+
 		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
 		Menu m = new Menu();
 		m.begin(window);
->>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 	}
 }
 

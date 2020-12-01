@@ -103,7 +103,6 @@ public class SeatView implements View, Initializable{
 		seatController.addSeatsToCart(selectedSeats);
 		PaymentView p= new PaymentView();
 		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
-		PaymentView p= new PaymentView(false, false);
 		p.begin(window);
 	}
 	

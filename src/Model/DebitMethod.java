@@ -1,8 +1,6 @@
 package Model;
 
 public class DebitMethod implements PaymentMethod{
-<<<<<<< HEAD
-=======
 	private int number;
 	private int cvv;
 	
@@ -37,6 +35,5 @@ public class DebitMethod implements PaymentMethod{
 	{
 		number = c;
 	}
->>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 
 }

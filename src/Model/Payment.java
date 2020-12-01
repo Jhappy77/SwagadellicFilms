@@ -3,9 +3,6 @@ package Model;
 import java.util.UUID;
 
 public class Payment {
-<<<<<<< HEAD
-
-=======
 	private String id;
 	private PaymentMethod method;
 	private float dollarAmount;
@@ -50,9 +47,4 @@ public class Payment {
 		return dollarAmount;
 	}
 	
-	public boolean getState()
-	{
-		return isProcessed;
-	}
->>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 }

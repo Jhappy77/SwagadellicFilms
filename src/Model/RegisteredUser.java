@@ -1,8 +1,8 @@
 package Model;
 
+import java.util.Date;
+
 public class RegisteredUser implements User{
-<<<<<<< HEAD
-=======
 	private String username;
 	private String password;
 	private String email;
@@ -41,7 +41,7 @@ public class RegisteredUser implements User{
 	@Override
 	public boolean canSeeEarlyInfo() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	
 
@@ -115,6 +115,5 @@ public class RegisteredUser implements User{
 		this.method = method;
 	}
 	
->>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 
 }
