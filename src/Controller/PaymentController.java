@@ -14,6 +14,13 @@ import Model.Ticket;
 import Model.User;
 
 public class PaymentController {
+<<<<<<< HEAD
+	private User u;
+	public static void addPayment(User u)
+	{
+		
+	}
+=======
 //	public static ArrayList<Ticket> tickets;
 	public static ArrayList<Seat> bookedSeats;
 //	private User u;
@@ -22,6 +29,7 @@ public class PaymentController {
 //	{
 //		
 //	}
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 	
 	public static int searchPaymentID(String id)
 	{
@@ -116,9 +124,9 @@ public class PaymentController {
 		theCart.removeTicket(id);
 	}
 	
-//	public void setUser(User u)
-//	{
-//		this.u = u;
-//	}
+	public void setUser(User u)
+	{
+		this.u = u;
+	}
 	
 }

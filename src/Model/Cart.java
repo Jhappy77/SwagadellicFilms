@@ -8,6 +8,8 @@ import Controller.DatabaseManager;
 public class Cart {
 	
 	private List<Ticket> tickets;
+<<<<<<< HEAD
+=======
 	private static Cart cart;
 	
 	private Cart() {
@@ -59,5 +61,6 @@ public class Cart {
 		}
 	}
 	
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 	
 }

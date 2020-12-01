@@ -22,7 +22,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+<<<<<<< HEAD
+import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
+=======
+import java.util.List;
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 import java.util.Map;
 import java.util.StringJoiner;
 
@@ -57,6 +63,7 @@ public class DatabaseManager {
 		return theDatabaseManager;
 	}
 	
+<<<<<<< HEAD
 	public List<Integer> queryBookedSeats(String screeningId) {
 		//PLACEHOLDER - Can replace with real query function when made
 		List<Integer> li = new ArrayList<>();
@@ -75,15 +82,41 @@ public class DatabaseManager {
         processUrl("save-ticket");
         Map<String,String> arguments = new HashMap<>();
         arguments.put("ticket_id", ticketToAdd.getId());
+        arguments.put("seat_no", ticketToAdd.getSeatNumber());
+=======
+	// How do I get screening_id and user_id from this?
+	public void saveTicket(Ticket ticketToAdd) throws IOException, JSONException {  
+        processMethod("save-ticket", "POST");
+        Map<String,String> arguments = new HashMap<>();
+        arguments.put("ticket_id", ticketToAdd.getId());
         arguments.put("seat_no", Integer.toString(ticketToAdd.getSeatNumber()));
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
         arguments.put("screening_id", ticketToAdd.getScreening().getId());
         // PUT USER ID
         processPost(arguments);
 	}
 	
+<<<<<<< HEAD
 	// need to implement payment first
 	public void savePayment(Payment thePayment) throws IOException, JSONException {
-        processUrl("save-payment");
+        URL url = new URL(baseURL + "save-payment");
+        URLConnection con = url.openConnection();
+        connection = (HttpURLConnection)con;
+        connection.setRequestMethod("POST");
+        connection.setDoOutput(true);
+        
+=======
+	public void removeTicket(String ticketId) throws IOException {
+		processMethod("delete-ticket", "DELETE");
+		Map<String, String> arguments = new HashMap<>();
+		arguments.put("pk", ticketId);
+		processPost(arguments);
+	}
+	
+	// need to implement payment first
+	public void savePayment(Payment thePayment) throws IOException, JSONException {
+		processMethod("save-payment", "POST");
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
         Map<String,String> arguments = new HashMap<>();
         arguments.put("amount", String.valueOf(thePayment.getAmount()));
         arguments.put("user_id", thePayment.getID()); // should this be payment ID?
@@ -92,7 +125,17 @@ public class DatabaseManager {
 	
 	// need to implement registereduser first
 	public void saveRegisteredUser(RegisteredUser userInfo) throws JSONException, IOException {
-		processUrl("registered-user");
+<<<<<<< HEAD
+		String URL = baseURL + "register-user";
+		JSONArray jsonArray = new JSONArray();
+        JSONObject objItem = readJsonFromUrl(URL);
+        objItem.put("name", userInfo.getName()); //
+        objItem.put("birthdate",  userInfo.getDateOfBirth()); //
+        objItem.put("password", userInfo.getPassword()); //
+        objItem.put("email",  userInfo.getEmail()); //
+        jsonArray.put(objItem);
+=======
+		processMethod("registered-user", "POST");
 		Map<String,String> arguments = new HashMap<>();
 		arguments.put("name", userInfo.getName()); //
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
@@ -100,32 +143,68 @@ public class DatabaseManager {
 		arguments.put("password", userInfo.getPassword()); //
 		arguments.put("email",  userInfo.getEmail()); //
 		processPost(arguments);
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 	}
 	
 	// need to implement
 	public void saveCreditInfo(RegisteredUser regUser, CreditMethod credit) throws IOException, JSONException {
-		processUrl("save-credit");
+<<<<<<< HEAD
+		String URL = baseURL + "save-credit";
+		JSONArray jsonArray = new JSONArray();
+        JSONObject objItem = readJsonFromUrl(URL);
+        objItem.put("user_id", regUser.getEmail()); //
+        objItem.put("credit_number",  credit.getNumber()); //
+        jsonArray.put(objItem);
+=======
+		processMethod("save-credit", "POST");
 		Map<String,String> arguments = new HashMap<>();
 		arguments.put("user_id", regUser.getEmail()); //
 		arguments.put("credit_number",  String.valueOf(credit.getNumber())); //
 		processPost(arguments);
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 	}
 	
 	// need to implement
 	public void saveDebitInfo(RegisteredUser regUser, DebitMethod debit) throws JSONException, IOException {
-		processUrl("save-debit");
+<<<<<<< HEAD
+		String URL = baseURL + "save-debit";
+		JSONArray jsonArray = new JSONArray();
+        JSONObject objItem = readJsonFromUrl(URL);
+        objItem.put("user_id", regUser.getEmail()); //
+        objItem.put("debit_number",  debit.getNumber()); //
+        jsonArray.put(objItem);
+=======
+		processMethod("save-debit", "POST");
 		Map<String,String> arguments = new HashMap<>();
 		arguments.put("user_id", regUser.getEmail()); //
 		arguments.put("debit_number", String.valueOf(debit.getNumber())); //
         processPost(arguments);
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 	}
 	
 	public boolean validateLogin(String username, String password) throws IOException, JSONException {
 		String URL = baseURL + "login?email=" + username + "&password=" + password;
+<<<<<<< HEAD
 		JSONObject jsonFile = readJsonFromUrl(URL);
 		if(!(jsonFile.has("Login Error")))
 			return false;
 		return true;
+=======
+		JSONObject j = readJsonFromUrl(URL);
+		if(j.get("email").equals(username))
+			return true;
+		return false;
+	}
+	
+	public void queryForRegisteredUser(String username, String password) throws JSONException, IOException {
+		String URL = baseURL + "login?email=" + username + "&password=" + password;
+		JSONObject j = readJsonFromUrl(URL);
+		String name = j.getString("name");
+		String birthdate = j.getString("birthdate");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = format.parse(birthdate);
+		RegisteredUser(username, password, username, date, name);
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 	}
 	
 	public List<Movie> queryMovies() throws ParseException {
@@ -247,6 +326,22 @@ public class DatabaseManager {
 		return screeningList;
 	}
 	
+<<<<<<< HEAD
+=======
+	public List<Integer> queryBookedSeats(String screeningId) {
+		String URL = baseURL + "?format=json&screeningId=" + screeningId;
+		List<Integer> bookedSeats = new ArrayList<Integer>();
+        try {
+            JSONArray j = readJsonArrayFromUrl(URL);
+            for(int i = 0; i < j.length(); i++)
+            	bookedSeats.add(j.getInt(i));
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+        return bookedSeats;
+	}
+	
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 	public Ticket queryTicket(String ticketId) {
         String URL = baseURL + "ticket?format=json&ticketId=" + ticketId;
         try {
@@ -258,7 +353,11 @@ public class DatabaseManager {
             	String movie_name = j.getJSONObject("screening_id").getJSONObject("movie_id").getString("movie_name");
             	String theatre_name = j.getJSONObject("screening_id").getJSONObject("theatre_id").getString("theatre_name");
             	MovieScreening ms = new MovieScreening(ldt, theatre_name, movie_name, screening_id);
+<<<<<<< HEAD
+            	String seat_num = j.getString("seat_no");
+=======
             	int seat_num = Integer.parseInt(j.getString("seat_no"));
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
             	Ticket t = new Ticket(ticketId, ms, seat_num);
             	return t;
             }
@@ -281,12 +380,31 @@ public class DatabaseManager {
 	        return false;
 	    }
 	
-	public void processUrl(String ext) throws IOException {
+<<<<<<< HEAD
+	public static void processUrl(String ext) throws IOException {
         apiUrl = new URL(baseURL + ext);
         URLConnection con = apiUrl.openConnection();
         connection = (HttpURLConnection)con;
         connection.setRequestMethod("POST");
         connection.setDoOutput(true);
+	}
+	 
+	public static void processPost(Map<String,String> arguments) throws IOException {
+        StringJoiner sj = new StringJoiner("&");
+        for(Map.Entry<String,String> entry : arguments.entrySet())
+            sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "=" + URLEncoder.encode(entry.getValue(), "UTF-8"));
+        byte[] out = sj.toString().getBytes(StandardCharsets.UTF_8);
+        int length = out.length;
+        
+=======
+	public void processMethod(String ext, String method) throws IOException {
+        apiUrl = new URL(baseURL + ext);
+        URLConnection con = apiUrl.openConnection();
+        connection = (HttpURLConnection)con;
+        connection.setRequestMethod(method);
+        connection.setDoOutput(true);
+        if (method.equals("DELETE"))
+        	connection.connect();
 	}
 	 
 	public void processPost(Map<String,String> arguments) throws IOException {
@@ -295,6 +413,7 @@ public class DatabaseManager {
 		    sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "=" + URLEncoder.encode(entry.getValue(), "UTF-8"));
 		byte[] out = sj.toString().getBytes(StandardCharsets.UTF_8);
 		int length = out.length;
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
         connection.setFixedLengthStreamingMode(length);
         connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
         connection.connect();
@@ -353,9 +472,24 @@ public class DatabaseManager {
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();
 //			}
+<<<<<<< HEAD
+//		}
+			
+//	        processUrl("save-ticket");
+//			
+//	        Map<String,String> arguments = new HashMap<>();
+//	        arguments.put("ticket_id", "99");
+//	        arguments.put("seat_no", "99");
+//	        arguments.put("screening_id", "99");
+//	        // PUT USER ID
+//	        
+//	        processPost(arguments);
+//		}
+}
+=======
 //		
 //			
-//	        inst.processUrl("save-debit");
+//	        inst.processMethod("save-debit", "POST");
 //	        Map<String,String> arguments = new HashMap<>();
 //	        arguments.put("user_id", "johncena@shaw.ca");
 //	        arguments.put("debit_number", "99");
@@ -363,3 +497,4 @@ public class DatabaseManager {
 //		}
 }
 
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da

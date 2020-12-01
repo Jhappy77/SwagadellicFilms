@@ -1,6 +1,7 @@
 package Boundary;
 
 import java.io.IOException;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,6 +11,7 @@ import Controller.SeatController;
 import Model.MovieScreening;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import Controller.SeatController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+
 public class SeatView implements View, Initializable{
 	
 	Stage window;
@@ -31,7 +34,6 @@ public class SeatView implements View, Initializable{
 	
 	@FXML
 	private Label lbss;
-	
 	public SeatMap theSeatMap;
 	
 	
@@ -90,7 +92,6 @@ public class SeatView implements View, Initializable{
 	}
 	
 	public void checkEvent(ActionEvent event){
-		
 		System.out.println("Check event!");
 		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
 		int count=0;
@@ -99,10 +100,8 @@ public class SeatView implements View, Initializable{
 	}
 	
 	public void Continue(ActionEvent event) {
-		
 		seatController.addSeatsToCart(selectedSeats);
-		
-		
+		PaymentView p= new PaymentView();
 		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
 		PaymentView p= new PaymentView(false, false);
 		p.begin(window);

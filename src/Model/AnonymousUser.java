@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+package Model;
+
+public class AnonymousUser implements User{
+
+}
+=======
 //package Model;
 //
 //public class AnonymousUser implements User{
@@ -18,3 +25,4 @@
 //	}
 //	
 //}
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da

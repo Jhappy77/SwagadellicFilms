@@ -1,8 +1,8 @@
 package Model;
 
-import java.util.Date;
-
 public class RegisteredUser implements User{
+<<<<<<< HEAD
+=======
 	private String username;
 	private String password;
 	private String email;
@@ -22,6 +22,14 @@ public class RegisteredUser implements User{
 		this.setMethod(method);
 //		userID = id;
 	}
+	
+	public RegisteredUser(String username, String password, String email, Date birthdate, String name) {
+        this.setUsername(username);
+        this.setPassword(password);
+        this.setEmail(email);
+        this.setName(name);
+        this.setDateOfBirth(birthdate);
+    }
 
 
 	@Override
@@ -107,5 +115,6 @@ public class RegisteredUser implements User{
 		this.method = method;
 	}
 	
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 
 }

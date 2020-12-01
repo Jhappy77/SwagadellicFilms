@@ -1,6 +1,9 @@
 package Boundary;
 
 import java.io.IOException;
+<<<<<<< HEAD
+
+=======
 import java.util.ArrayList;
 
 import org.json.JSONException;
@@ -16,6 +19,7 @@ import Model.FinancialInstitution;
 import Model.MovieScreening;
 import Model.Payment;
 import Model.Ticket;
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,6 +27,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+<<<<<<< HEAD
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+public class PaymentView {
+=======
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -34,12 +45,22 @@ public class PaymentView implements View{
 	private boolean fee;
 	private boolean refund;
 	private float price;
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 	
 	Stage window;
 	
 	ObservableList<String> cbctList;
 	
 	@FXML
+<<<<<<< HEAD
+	private ChoiceBox cbct;
+	
+	@FXML
+	private TextField txtcn;
+	
+	public PaymentView() {
+		 cbct = new ChoiceBox();
+=======
 	private ChoiceBox<String> cbct;
 	
 	@FXML
@@ -57,6 +78,7 @@ public class PaymentView implements View{
 		price = 0;
 		paymentID = 0;
 		 cbct = new ChoiceBox<String>();
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 		 cbctList = FXCollections.observableArrayList("Credit Card","Debit Card");
 		 initialize();
 	}
@@ -68,6 +90,10 @@ public class PaymentView implements View{
 	public void perform() {
 		
 		try {
+<<<<<<< HEAD
+			window= new Stage();
+=======
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 			Parent root =FXMLLoader.load(getClass().getResource("/Boundary/Payment.fxml"));
 			Scene scene= new Scene(root);
 			window.setScene(scene);
@@ -79,6 +105,18 @@ public class PaymentView implements View{
 		
 	}
 	
+<<<<<<< HEAD
+	public void confirmPayment(ActionEvent event) {
+		//Logic in here confirms payment
+
+	}
+	
+	public void goBack(ActionEvent event) {
+		//logic for going to the menu window:
+		//for now:
+		Menu m = new Menu();
+		m.perform();
+=======
 	public void confirmPayment(ActionEvent event) throws IOException, JSONException, PaymentException {
 		if(!fee)
 		{
@@ -136,6 +174,7 @@ public class PaymentView implements View{
 	public void begin(Stage s) {
 		window = s;
 		perform();
+>>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
 	}
 
 }
