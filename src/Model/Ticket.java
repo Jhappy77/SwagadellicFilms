@@ -14,7 +14,7 @@ public class Ticket {
 	private String seatNumber;
 	
 	public Ticket(String ticketId, MovieScreening sTime, String seatNumber) {
-		this.seatNumber = seatNumber;
+		this.setSeatNumber(seatNumber);
 		setPrice(20);
 		setId(ticketId);
 		setMovieDate(sTime);
@@ -85,6 +85,14 @@ public class Ticket {
 	public MovieScreening getScreening()
 	{
 		return showTime;
+	}
+
+	public String getSeatNumber() {
+		return seatNumber;
+	}
+
+	public void setSeatNumber(String seatNumber) {
+		this.seatNumber = seatNumber;
 	}
 	
 //	@Override
