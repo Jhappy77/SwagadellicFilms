@@ -7,7 +7,8 @@ import Model.Ticket;
 import Model.User;
 
 public class PaymentController {
-	public static void addPaymentID(User u)
+	private User u;
+	public static void addPayment(User u)
 	{
 		
 	}
@@ -37,9 +38,9 @@ public class PaymentController {
 		
 	}
 	
-//	public void setUser(User u)
-//	{
-//		this.u = u;
-//	}
+	public void setUser(User u)
+	{
+		this.u = u;
+	}
 	
 }

@@ -6,7 +6,7 @@ import Model.RegisteredUser;
 import Model.User;
 
 public class UserController {
-	private static User selectedUser;
+	private User u;
 	
 	public static boolean verifyLoginDebit(String username, String password)
 	{
@@ -23,14 +23,8 @@ public class UserController {
 		
 	}
 	
-	
-	public static User getActive()
+	public void setUser(User u)
 	{
-		return selectedUser;
-	}
-	
-	public void setActive(User customer)
-	{
-		selectedUser = customer;
+		this.u = u;
 	}
 }
