@@ -68,12 +68,12 @@ public class DatabaseManager {
         processPost(arguments);
 	}
 	
-	public void removeTicket(String ticketId) throws IOException {
-		processMethod("delete-ticket", "DELETE");
-		Map<String, String> arguments = new HashMap<>();
-		arguments.put("pk", ticketId);
-		processPost(arguments);
-	}
+	 public void removeTicket(String ticketId) throws IOException {
+	        processMethod("delete-ticket?pk=" + ticketId, "DELETE");
+	        Map<String, String> arguments = new HashMap<>();
+	        arguments.put("pk", ticketId);
+	        processPost(arguments);
+	    }
 	
 	// need to implement payment first
 	public void savePayment(Payment thePayment) throws IOException, JSONException {
@@ -124,15 +124,7 @@ public class DatabaseManager {
 		return new RegisteredUser(username, password, username, date, name);
 	}
 	
-//	public void queryForRegisteredUser(String username, String password) throws JSONException, IOException {
-//		String URL = baseURL + "login?email=" + username + "&password=" + password;
-//		JSONObject j = readJsonFromUrl(URL);
-//		String name = j.getString("name");
-//		String birthdate = j.getString("birthdate");
-//		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//		Date date = format.parse(birthdate);
-//		RegisteredUser(username, password, username, date, name);
-//	}
+
 	
 	public List<Movie> queryMovies() throws ParseException {
 		String URL = baseURL + "movies?format=json";
@@ -301,15 +293,13 @@ public class DatabaseManager {
 	        return false;
 	    }
 	
-	public void processMethod(String ext, String method) throws IOException {
-        apiUrl = new URL(baseURL + ext);
-        URLConnection con = apiUrl.openConnection();
-        connection = (HttpURLConnection)con;
-        connection.setRequestMethod(method);
-        connection.setDoOutput(true);
-        if (method.equals("DELETE"))
-        	connection.connect();
-	}
+	 public void processMethod(String ext, String method) throws IOException {
+	        apiUrl = new URL(baseURL + ext);
+	        URLConnection con = apiUrl.openConnection();
+	        connection = (HttpURLConnection)con;
+	        connection.setRequestMethod(method);
+	        connection.setDoOutput(true);
+	    }
 	 
 	public void processPost(Map<String,String> arguments) throws IOException {
 		StringJoiner sj = new StringJoiner("&");

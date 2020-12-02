@@ -2,16 +2,21 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="330.0" prefWidth="576.0" style="-fx-background-color: #1559;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.LoginView">
+<AnchorPane prefHeight="330.0" prefWidth="576.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.LoginView">
    <children>
-      <TextField fx:id="txtusername" layoutX="160.0" layoutY="89.0" prefHeight="25.0" prefWidth="229.0" promptText="Enter your username" />
-      <TextField fx:id="txtpassword" layoutX="160.0" layoutY="165.0" prefHeight="25.0" prefWidth="229.0" promptText="Enter your password" />
-      <Button layoutX="458.0" layoutY="15.0" mnemonicParsing="false" onAction="#signUp" prefHeight="41.0" prefWidth="77.0" text="Sign Up" />
-      <Button layoutX="211.0" layoutY="255.0" mnemonicParsing="false" onAction="#Login" prefHeight="41.0" prefWidth="127.0" text="LogIn" />
-      <Button layoutX="497.0" layoutY="283.0" mnemonicParsing="false" onAction="#returnToMenu" text="Go Back" />
-      <Label fx:id="lbstatus" layoutX="132.0" layoutY="219.0" prefHeight="17.0" prefWidth="291.0" text="Status" textFill="RED" />
+      <TextField fx:id="txtusername" layoutX="160.0" layoutY="89.0" prefHeight="25.0" prefWidth="229.0" promptText="Enter your username" style="-fx-background-color: #D3D3D3;" />
+      <Button layoutX="458.0" layoutY="15.0" mnemonicParsing="false" onAction="#signUp" prefHeight="41.0" prefWidth="77.0" style="-fx-background-color: #000080;" text="Sign Up" textFill="WHITE" />
+      <Button layoutX="211.0" layoutY="255.0" mnemonicParsing="false" onAction="#Login" prefHeight="41.0" prefWidth="127.0" style="-fx-background-color: #000080;" text="LogIn" textFill="WHITE" />
+      <Button layoutX="476.0" layoutY="296.0" mnemonicParsing="false" onAction="#returnToMenu" style="-fx-background-color: #000080;" text="Back to Menu" textFill="WHITE" />
+      <Label fx:id="lbstatus" layoutX="160.0" layoutY="200.0" prefHeight="17.0" prefWidth="291.0" text="STATUS" textFill="NAVY">
+         <font>
+            <Font name="Candara" size="18.0" />
+         </font></Label>
+      <PasswordField fx:id="txtpassword" layoutX="160.0" layoutY="153.0" prefHeight="25.0" prefWidth="229.0" promptText="Enter your password" style="-fx-background-color: #D3D3D3;" />
    </children>
 </AnchorPane>
