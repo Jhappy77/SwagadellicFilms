@@ -1,6 +1,13 @@
 package Model;
 
 public class FinancialInstitution {
+	
+	
+	/**
+	 * A pseudo class which simulates a financial institution.
+	 * Entered credit or debit number should be 1111111 or 1234567 for the payment to process.
+	 * @return
+	 */
     public static Payment processPayment(Payment p)
     {
         PaymentMethod pm = p.getMethod();
@@ -39,7 +46,7 @@ public class FinancialInstitution {
     
     private static boolean processDebitMethod(DebitMethod dMethod)
     {
-        if(dMethod.getCVV() == 111 && dMethod.getNumber() == 1111111)
+        if(dMethod.getCVV() == 111 && dMethod.getNumber() == 1111111 || dMethod.getNumber() == 1234567 )
         {
             return true;
         }
@@ -48,7 +55,7 @@ public class FinancialInstitution {
     
     private static boolean processCreditMethod(CreditMethod cMethod)
     {
-        if(cMethod.getCVV() == 111 && cMethod.getNumber() == 1111111)
+        if(cMethod.getCVV() == 111 && (cMethod.getNumber() == 1111111|| cMethod.getNumber() == 1234567 ))
         {
             return true;
         }

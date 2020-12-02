@@ -28,6 +28,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class PaymentView implements View{
@@ -43,6 +44,9 @@ public class PaymentView implements View{
 	private Label paymentstatus;
 	
 	@FXML
+	private VBox cartContent;
+	
+	@FXML
 	private Label amount;
 	
 	@FXML
@@ -55,6 +59,9 @@ public class PaymentView implements View{
 	}
 	@FXML
 	public void initialize() {
+		cartContent = new VBox();
+		cartContent.getChildren().addAll(PaymentController.fillCartContentView());
+		setAmount();
 		cbct.setItems(cbctList);
 	}
 		 
@@ -79,13 +86,15 @@ public class PaymentView implements View{
 		{
 			PaymentMethodComponent pmc = new PaymentMethodComponent();
 			pmc.setPaymentMethod(new CreditMethod(Integer.parseInt(cardNumber)));
-			if(PaymentController.payTickets(pmc.getMethod()))
+			boolean paymentSucceeded = PaymentController.payTickets(pmc.getMethod());
+			if(paymentSucceeded)
 			{
-				amount.setText(Float.toString(PaymentController.getPrice()));
+				setAmount();
 				paymentstatus.setText("Amount paid successully");
 			}
-			else
+			else {
 				paymentstatus.setText("Credit card denied");
+			}
 		}
 		else
 		{
@@ -93,11 +102,21 @@ public class PaymentView implements View{
 			pmc.setPaymentMethod(new DebitMethod(Integer.parseInt(cardNumber)));
 			if(PaymentController.payTickets(pmc.getMethod()))
 			{
-				amount.setText(Float.toString(PaymentController.getPrice()));
+				setAmount();
 				paymentstatus.setText("Amount paid successully");
 			}
 			else
 				paymentstatus.setText("Credit card denied");
+		}
+	}
+	
+	private void setAmount() {
+		String totalPrice = Float.toString(PaymentController.getTotalPrice());
+		if(amount != null) {
+		amount.setText(totalPrice);
+		} else {
+			amount = new Label();
+			amount.setText(totalPrice);
 		}
 	}
 	

@@ -23,6 +23,11 @@ public class Ticket {
 		isCancellable = cancellable(showTime.getMovieDate());
 	}
 	
+	@Override
+	public String toString() {
+		return "Seat #"+ seatNumber + " for " + showTime.toString() + "(Ticket ID: " + id + ")";
+	}
+	
 	
 	public boolean getIsCancellable() {
 		return isCancellable;

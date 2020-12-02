@@ -2,6 +2,7 @@ package Controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONException;
 
@@ -12,6 +13,8 @@ import Model.Payment;
 import Model.PaymentMethod;
 import Model.Ticket;
 import Model.User;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 
 public class PaymentController {
 //	public static ArrayList<Ticket> tickets;
@@ -23,9 +26,14 @@ public class PaymentController {
 //		
 //	}
 	
+	/**
+	 * Price of any additional charges (I.E. renewing things)
+	 */
 	private static float price;
-	public static float getPrice() {
-		return price;
+	
+	public static float getTotalPrice() {
+		Cart theCart = Cart.getInstance();
+		return price + theCart.subtotal();
 	}
 	public static void setPrice(float f) {
 		price =f;
@@ -123,6 +131,27 @@ public class PaymentController {
 	{
 		Cart theCart = Cart.getInstance();
 		theCart.removeTicket(id);
+	}
+	
+	/**
+	 * Fills the cart content VBox
+	 * @param cartContent
+	 */
+	public static List<Label> fillCartContentView() {
+		Cart theCart = Cart.getInstance();
+		List<Label> cartInfos = new ArrayList<>();
+		
+		for(Ticket t: theCart.getTickets()) {
+			String message = t.toString();
+			Label l = new Label();
+			l.setText(message);
+			cartInfos.add(l);
+			System.out.println("Your cart contains:" + message);
+		}
+		
+		//cartContent.getChildren().addAll(cartInfos);
+		return cartInfos;
+		
 	}
 	
 	

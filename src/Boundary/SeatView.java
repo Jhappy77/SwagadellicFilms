@@ -22,6 +22,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -48,16 +49,31 @@ public class SeatView implements View, Initializable{
 	@FXML
 	private VBox seatMapBox;
 	private SeatController seatController;
+	@FXML
+	private HBox selectedSeatBox;
 	
 	private List<Integer> selectedSeats;
 	
 	public void addSeat(int seatID) {
 		selectedSeats.add(seatID);
+		updateSelectedSeats();
 		System.out.println("The selected seats are: " + selectedSeats.toString());
+	}
+	
+	private void updateSelectedSeats() {
+		List<Label> seatLabels = new ArrayList<Label>();
+		for(int sid:selectedSeats) {
+			Label l = new Label();
+			l.setText("Seat #" + sid);
+			seatLabels.add(l);
+		}
+		selectedSeatBox.getChildren().clear();
+		selectedSeatBox.getChildren().addAll(seatLabels);
 	}
 	
 	public void removeSeat(int seatID) {
 		selectedSeats.removeAll(Arrays.asList(seatID));
+		updateSelectedSeats();
 		System.out.println("The selected seats are: " + selectedSeats.toString());
 	}
 	

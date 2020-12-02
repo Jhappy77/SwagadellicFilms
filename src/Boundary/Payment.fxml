@@ -5,8 +5,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.PaymentView">
+<AnchorPane prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.PaymentView">
    <children>
       <Button layoutX="85.0" layoutY="161.0" mnemonicParsing="false" onAction="#confirmPayment" text="Confirm Payment" />
       <ChoiceBox fx:id="cbct" layoutX="84.0" layoutY="26.0" prefWidth="150.0" />
@@ -14,8 +16,10 @@
       <Label layoutX="13.0" layoutY="65.0" text="Card Number" />
       <TextField fx:id="txtcn" layoutX="99.0" layoutY="61.0" />
       <Button layoutX="13.0" layoutY="161.0" mnemonicParsing="false" onAction="#goBack" text="Go Back" />
-      <Label layoutX="29.0" layoutY="124.0" prefHeight="17.0" prefWidth="205.0" text="Status" textFill="#970000" />
+      <Label fx:id="paymentstatus" layoutX="29.0" layoutY="124.0" prefHeight="17.0" prefWidth="205.0" text="Status" textFill="#970000" />
       <Label fx:id="amount" layoutX="29.0" layoutY="100.0" prefHeight="17.0" prefWidth="198.0" text="amount" />
       <Button layoutX="213.0" layoutY="161.0" mnemonicParsing="false" onAction="#buyMoreTickets" text="Buy more!" />
+      <Label layoutX="25" layoutY="200" text="Cart Content: " />
+      <VBox fx:id="cartContent" layoutX="25" layoutY="230" />
    </children>
 </AnchorPane>

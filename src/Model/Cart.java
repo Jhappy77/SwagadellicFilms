@@ -25,12 +25,16 @@ public class Cart {
 		return tickets;
 	}
 	
-	public Payment makePayment(PaymentMethod pm) { 
+	public float subtotal() {
 		float total = 0;
 		for(Ticket t: tickets) {
 			total += t.getPrice();
 		}
-		return new Payment(total, pm);
+		return total;
+	}
+	
+	public Payment makePayment(PaymentMethod pm) { 
+		return new Payment(subtotal(), pm);
 	}
 	
 	public void clear() {
@@ -55,8 +59,8 @@ public class Cart {
 		for(Ticket t: tickets) {
 			DatabaseManager dbm = DatabaseManager.getInstance();
 			dbm.saveTicket(t);
-			this.removeTicket(t.getId());
 		}
+		clear();
 	}
 	
 	
