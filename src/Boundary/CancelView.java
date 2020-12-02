@@ -27,9 +27,6 @@ Stage window;
 	ObservableList<String> cbutList;
 	
 	@FXML
-	private ChoiceBox<String> cbut;
-	
-	@FXML
 	private TextField txtsid;
 	
 	@FXML
@@ -38,15 +35,6 @@ Stage window;
 	@FXML
 	private TextField txttid;
 	
-	public CancelView() {
-		 cbut = new ChoiceBox<String>();
-		 cbutList = FXCollections.observableArrayList("Guest","Registered");
-		 initialize();
-	}
-	@FXML
-	public void initialize() {
-		cbut.setItems(cbutList);
-	}
 	
 	public void begin(Stage s)
 	{
@@ -86,7 +74,7 @@ Stage window;
 			else {
 			//For registered user add logic to make cancellation then take to the main menu
 				PaymentView pv = new PaymentView();
-				PaymentController.setPrice(-0.85f);
+				PaymentController.setPrice((float)-(0.85*t.getPrice()));
 				pv.begin(window);
 			}
 		}

@@ -14,7 +14,7 @@
       <Label layoutX="13.0" layoutY="65.0" text="Card Number" />
       <TextField fx:id="txtcn" layoutX="99.0" layoutY="61.0" />
       <Button layoutX="13.0" layoutY="161.0" mnemonicParsing="false" onAction="#goBack" text="Go Back" />
-      <Label layoutX="29.0" layoutY="124.0" prefHeight="17.0" prefWidth="205.0" text="Status" textFill="#970000" />
+      <Label fx:id="paymentstatus" layoutX="29.0" layoutY="124.0" prefHeight="17.0" prefWidth="205.0" text="Status" textFill="#970000" />
       <Label fx:id="amount" layoutX="29.0" layoutY="100.0" prefHeight="17.0" prefWidth="198.0" text="amount" />
       <Button layoutX="213.0" layoutY="161.0" mnemonicParsing="false" onAction="#buyMoreTickets" text="Buy more!" />
    </children>

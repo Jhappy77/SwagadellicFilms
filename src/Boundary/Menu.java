@@ -57,6 +57,7 @@ public class Menu implements View {
 	
 	public void logIn(ActionEvent event) throws IOException
 	{
+		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
 		Parent root =FXMLLoader.load(getClass().getResource("/Boundary/LoginNew.fxml"));
 		Scene scene= new Scene(root);
 		window.setScene(scene);
