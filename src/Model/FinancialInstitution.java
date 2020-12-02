@@ -39,7 +39,7 @@ public class FinancialInstitution {
     
     private static boolean processDebitMethod(DebitMethod dMethod)
     {
-        if(dMethod.getCVV() == 111)
+        if(dMethod.getCVV() == 111 && dMethod.getNumber() == 1111111)
         {
             return true;
         }
@@ -48,7 +48,7 @@ public class FinancialInstitution {
     
     private static boolean processCreditMethod(CreditMethod cMethod)
     {
-        if(cMethod.getCVV() == 111)
+        if(cMethod.getCVV() == 111 && cMethod.getNumber() == 1111111)
         {
             return true;
         }

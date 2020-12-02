@@ -70,7 +70,9 @@ public class SelectMovieView {
 		 cbbsList.removeAll(cbbsList);
 		 MList = DatabaseManager.getInstance().queryMovies();
 		 for(int i=0; i<MList.size(); i++)
+		 {
 			 cbbmList.add(MList.get(i).getName());
+		 }
 		 cbbm.getItems().addAll(cbbmList);
 //		 status.setText("Hello");
 //			 
@@ -138,7 +140,6 @@ public class SelectMovieView {
 				 LocalDateTime ldt = MSList.get(i).getMovieDate();
 				 DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
 				 cbbsList.add(ldt.format(formatter));
-				 status.setText(ldt.format(formatter));
 			 }
 			 
 			 cbbs.getItems().addAll(cbbsList);
@@ -179,6 +180,7 @@ public class SelectMovieView {
 		//Logic in here takes you to the seat map of each selection
 		//for now:
 		String time = cbbs.getValue();
+		status.setText("Screening chosen successfully");
 		 if(time!=null)
 		 {
 			 for(int i=0; i<MSList.size(); i++)
@@ -190,9 +192,6 @@ public class SelectMovieView {
 		 }
 		MovieController.setSelectedScreening(showTime);
 		
-		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
-		SeatView sv = new SeatView();
-		sv.begin(window);
 	}
 	
 	public void goBack(ActionEvent event) {
@@ -202,6 +201,13 @@ public class SelectMovieView {
 		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
 		Menu m = new Menu();
 		m.begin(window);
+	}
+	
+	public void selectSeat(ActionEvent event)
+	{
+		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
+		SeatView sv = new SeatView();
+		sv.begin(window);
 	}
 }
 

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import Controller.MovieController;
 import Controller.PaymentController;
+import Controller.UserController;
+import Model.AnonymousUser;
 import Model.MovieScreening;
 import Model.Ticket;
 import javafx.application.Application;
@@ -65,11 +67,11 @@ public class MovieApp extends Application {
 	
 	public void useAsGuest(ActionEvent event) {
 		Menu m= new Menu();
+		UserController.setUser(new AnonymousUser());
 
 		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
 		m.begin(window);
 
-		m.perform();
 	}
 
 

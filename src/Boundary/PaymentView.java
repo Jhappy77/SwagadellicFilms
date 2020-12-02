@@ -110,12 +110,12 @@ public class PaymentView implements View{
 	}
 	
 	
-	public void goBack(ActionEvent event) {
-		//logic for going to the menu window:
-		//for now:
+	public void goBack(ActionEvent event) throws IOException {
 		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
-		Menu m = new Menu();
-		m.begin(window);
+		Parent root =FXMLLoader.load(getClass().getResource("/Boundary/MainPage.fxml"));
+		Scene scene= new Scene(root);
+		window.setScene(scene);
+		window.show();
 	}
 	@Override
 	public void begin(Stage s) {

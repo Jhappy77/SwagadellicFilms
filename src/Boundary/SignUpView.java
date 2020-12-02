@@ -91,7 +91,6 @@ public class SignUpView implements View{
 		}
 		
 		else {
-
 			LocalDate date = dob.getValue();
 			Instant instant = Instant.from(date);
 			Date birthdate = Date.from(instant);

@@ -70,29 +70,35 @@ Stage window;
 	public void confirmCancellation(ActionEvent event) {
 	 	window = (Stage) ((Button) event.getSource()).getScene().getWindow();
 		Ticket t = DatabaseManager.getInstance().queryTicket(txttid.getText());
-		if(UserController.getUser() instanceof RegisteredUser) {
-			DatabaseManager.getInstance().removeTicket(txttid.getText());
-			PaymentView pv = new PaymentView();
-			PaymentController.setPrice(0);
-			pv.begin(window);
-		}
-		else {
+		if(t!=null)
+		{
+			try {
+				DatabaseManager.getInstance().removeTicket(txttid.getText());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				cancelstatus.setText("Failed to remove ticket from database");
+			}
+			if(UserController.getUser() instanceof RegisteredUser) {
+				PaymentView pv = new PaymentView();
+				PaymentController.setPrice(0);
+				pv.begin(window);
+			}
+			else {
 			//For registered user add logic to make cancellation then take to the main menu
-			DatabaseManager.getInstance().removeTicket(txttid.getText());
-			SpecialMenu m = new SpecialMenu();
-			PaymentView pv = new PaymentView();
-			PaymentController.setPrice(-0.85f);
-			m.begin(window);
+				PaymentView pv = new PaymentView();
+				PaymentController.setPrice(-0.85f);
+				pv.begin(window);
+			}
 		}
 
 	}
 	
-	public void goBack(ActionEvent event) {
-	 	window = (Stage) ((Button) event.getSource()).getScene().getWindow();
-		//logic for going to the menu window:
-		//for now:
-		Menu m = new Menu();
-		m.begin(window);
+	public void goBack(ActionEvent event) throws IOException {
+		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
+		Parent root =FXMLLoader.load(getClass().getResource("/Boundary/MainPage.fxml"));
+		Scene scene= new Scene(root);
+		window.setScene(scene);
+		window.show();
 	}
 
 }

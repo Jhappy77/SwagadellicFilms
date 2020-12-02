@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<<<<<<< HEAD
-<AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.Menu">
-   <children>
-      <Button layoutX="59.0" layoutY="55.0" mnemonicParsing="false" onAction="#bookTickets" text="Book Tickets" />
-      <Button layoutX="57.0" layoutY="100.0" mnemonicParsing="false" onAction="#cancelTicket" text="Cancel Ticket" />
-=======
 <AnchorPane prefHeight="272.0" prefWidth="274.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.Menu">
    <children>
       <Button layoutX="96.0" layoutY="93.0" mnemonicParsing="false" onAction="#bookTickets" text="Book Tickets" />
       <Button layoutX="99.0" layoutY="136.0" mnemonicParsing="false" onAction="#cancelTicket" text="Cancel Ticket" />
       <Button layoutX="118.0" layoutY="180.0" mnemonicParsing="false" onAction="#returnToMenu" text="return" />
       <Button layoutX="208.0" layoutY="14.0" mnemonicParsing="false" onAction="#signUp" text="Subscribe" />
-      <Button mnemonicParsing="false" text="Button" />
       <Button layoutX="153.0" layoutY="14.0" mnemonicParsing="false" onAction="#logIn" text="Sign In" />
->>>>>>> a489fa46e6c00fd0c2432d59be00fa7416ce29da
+      <Button layoutX="11.0" layoutY="14.0" mnemonicParsing="false" onAction="#payAnnualFee" text="Pay Annual Fee" />
+      <Label fx:id="userstatus" layoutX="59.0" layoutY="217.0" prefHeight="17.0" prefWidth="185.0" text="Status" />
    </children>
 </AnchorPane>

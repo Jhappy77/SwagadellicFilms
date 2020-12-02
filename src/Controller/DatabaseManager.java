@@ -114,23 +114,25 @@ public class DatabaseManager {
         processPost(arguments);
 	}
 	
-	public boolean validateLogin(String username, String password) throws IOException, JSONException {
-		String URL = baseURL + "login?email=" + username + "&password=" + password;
-		JSONObject j = readJsonFromUrl(URL);
-		if(j.get("email").equals(username))
-			return true;
-		return false;
-	}
-	
-	public void queryForRegisteredUser(String username, String password) throws JSONException, IOException {
-		String URL = baseURL + "login?email=" + username + "&password=" + password;
+	public RegisteredUser validateLogin(String username, String password) throws IOException, JSONException, ParseException {
+		String URL = baseURL + "login?email=" + username + "&password=" + password + "&format=json";
 		JSONObject j = readJsonFromUrl(URL);
 		String name = j.getString("name");
 		String birthdate = j.getString("birthdate");
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = format.parse(birthdate);
-		RegisteredUser(username, password, username, date, name);
+		return new RegisteredUser(username, password, username, date, name);
 	}
+	
+//	public void queryForRegisteredUser(String username, String password) throws JSONException, IOException {
+//		String URL = baseURL + "login?email=" + username + "&password=" + password;
+//		JSONObject j = readJsonFromUrl(URL);
+//		String name = j.getString("name");
+//		String birthdate = j.getString("birthdate");
+//		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//		Date date = format.parse(birthdate);
+//		RegisteredUser(username, password, username, date, name);
+//	}
 	
 	public List<Movie> queryMovies() throws ParseException {
 		String URL = baseURL + "movies?format=json";

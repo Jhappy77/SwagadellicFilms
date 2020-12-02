@@ -4,18 +4,27 @@ import java.io.IOException;
 
 import java.text.ParseException;
 
-
+import Controller.PaymentController;
+import Controller.UserController;
+import Model.AnonymousUser;
+import Model.RegisteredUser;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class Menu implements View {
 
 
 	Stage window;
+	
+
+	@FXML
+	private Label userstatus;
 	
 	public void begin(Stage s)
 	{
@@ -25,7 +34,7 @@ public class Menu implements View {
 	@Override
 	public void perform() {
 		try {
-			Parent root =FXMLLoader.load(getClass().getResource("/Boundary/MenuPage.fxml"));
+			Parent root =FXMLLoader.load(getClass().getResource("/Boundary/MenuPage2.fxml"));
 			Scene scene= new Scene(root);
 			window.setScene(scene);
 			window.show();
@@ -48,7 +57,7 @@ public class Menu implements View {
 	
 	public void logIn(ActionEvent event) throws IOException
 	{
-		Parent root =FXMLLoader.load(getClass().getResource("/Boundary/Login.fxml"));
+		Parent root =FXMLLoader.load(getClass().getResource("/Boundary/LoginNew.fxml"));
 		Scene scene= new Scene(root);
 		window.setScene(scene);
 		window.show();
@@ -73,6 +82,22 @@ public class Menu implements View {
 		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
 		CancelView cv = new CancelView();
 		cv.begin(window);
+	}
+	
+	public void payAnnualFee(ActionEvent event)
+	{
+		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
+		if(UserController.getUser() instanceof RegisteredUser)
+		{
+			PaymentView pv = new PaymentView();
+			PaymentController.setPrice(20);
+			pv.begin(window);
+		}
+		else if(UserController.getUser() instanceof AnonymousUser)
+		{
+			userstatus.setText("You have to log in first");
+		}
+			
 	}
 
 }

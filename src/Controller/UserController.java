@@ -24,8 +24,8 @@ public class UserController {
 		u = us;
 	}
 
-	public static RegisteredUser getUser() {
+	public static User getUser() {
 		// TODO Auto-generated method stub
-		return null;
+		return u;
 	}
 }
