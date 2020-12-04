@@ -100,5 +100,19 @@ public class Menu implements View {
 		}
 			
 	}
+	
+	public void signOut(ActionEvent event)
+	{
+		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
+		if(UserController.getUser() instanceof RegisteredUser)
+		{
+			UserController.setUser(new AnonymousUser());
+			userstatus.setText("Sign out successfully");
+		}
+		else if(UserController.getUser() instanceof AnonymousUser)
+		{
+			userstatus.setText("You have to log in first");
+		}
+	}
 
 }

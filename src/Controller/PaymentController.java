@@ -17,7 +17,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 public class PaymentController {
-//	public static ArrayList<Ticket> tickets;
 	public static ArrayList<Seat> bookedSeats;
 //	private User u;
 //	
@@ -101,6 +100,7 @@ public class PaymentController {
 //				dbm.savePayment(thePayment);
 				theCart.saveTickets();
 				theCart.clear();
+				PaymentController.setPrice(0);
 				return true;
 			} catch (JSONException e) {
 				

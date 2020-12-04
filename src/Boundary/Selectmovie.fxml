@@ -4,17 +4,37 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="250.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.SelectMovieView">
+<AnchorPane prefHeight="250.0" prefWidth="300.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.SelectMovieView">
    <children>
-      <Label layoutX="18.0" layoutY="81.0" text="Browse Theatres" />
-      <Label layoutX="24.0" layoutY="50.0" text="Browse Movies" />
+      <Label layoutX="14.0" layoutY="81.0" text="Browse Theatres" />
+      <Label layoutX="14.0" layoutY="50.0" text="Browse Movies" />
       <Label layoutX="14.0" layoutY="116.0" text="Browse Showtimes" />
-      <Button layoutX="49.0" layoutY="211.0" mnemonicParsing="false" onAction="#goBack" text="Go Back" />
+      <Button layoutX="50.0" layoutY="196.0" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #cdcdcd;" text="Go Back">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
       <ComboBox fx:id="cbbm" layoutX="119.0" layoutY="46.0" onAction="#chooseTheatre" prefWidth="150.0" />
       <ComboBox fx:id="cbbt" layoutX="119.0" layoutY="77.0" onAction="#chooseScreening" prefWidth="150.0" />
       <ComboBox fx:id="cbbs" layoutX="119.0" layoutY="113.0" onAction="#Continue" prefWidth="150.0" />
-      <Label fx:id="status" layoutX="62.0" layoutY="163.0" prefHeight="17.0" prefWidth="189.0" text="Status" />
-      <Button layoutX="217.0" layoutY="211.0" mnemonicParsing="false" onAction="#selectSeat" text="Select seats" />
+      <Label fx:id="status" layoutX="14.0" layoutY="154.0" prefHeight="17.0" prefWidth="189.0" text="Status" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Button layoutX="177.0" layoutY="196.0" mnemonicParsing="false" onAction="#selectSeat" style="-fx-background-color: #ff4c4c;" text="Select seats" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Label layoutX="85.0" layoutY="14.0" text="SWAGADELLIC" textFill="#ff4c4c">
+         <font>
+            <Font name="Haettenschweiler" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="185.0" layoutY="14.0" text="FILMS" textFill="#cdcdcd">
+         <font>
+            <Font name="Haettenschweiler" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

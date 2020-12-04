@@ -8,12 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import Controller.PaymentController;
 import Controller.SeatController;
 import Model.MovieScreening;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import Controller.SeatController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -112,7 +108,6 @@ public class SeatView implements View, Initializable{
 	public void checkEvent(ActionEvent event){
 		System.out.println("Check event!");
 		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
-		int count=0;
 		String message = "Hello world!";
 		lbss.setText(message);
 	}

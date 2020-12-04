@@ -6,9 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -30,7 +28,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import Model.Cart;
 import Model.CreditMethod;
 import Model.DebitMethod;
 import Model.Movie;
@@ -202,14 +199,8 @@ public class DatabaseManager {
 				String Tid = String.valueOf(DBTheatreId);
 				if(movieId.equals(Mid) && theatreId.equals(Tid)) {
 					String screening_time = j.getJSONObject(i).getString("screening_time");
-					String date1 = "", date2 = "";
+					String date1 = "";
 					int k =0 ;
-//					while(k < 10)
-//					{
-//						char c = screening_time.charAt(k);
-//						date1 += c;
-//						date2 += c;
-//					}
 					while(k < screening_time.length()-6)
 					{
 						char c = screening_time.charAt(k);
@@ -218,16 +209,6 @@ public class DatabaseManager {
 						date1 += c;
 						k++;
 					}
-					
-					//k++;
-					
-//					String date = "";
-//					for(int k=0; k<screening_time.length(); k++)
-//					{
-//						if(screening_time.charAt(k) != 'T')
-//							date+=screening_time.charAt(k);
-//					}
-					
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 					LocalDateTime ldt = LocalDateTime.parse(date1.toString(), formatter);
 					String theatre_name = j.getJSONObject(i).getJSONObject("theatre_id").getString("theatre_name");
@@ -264,12 +245,23 @@ public class DatabaseManager {
             JSONObject j = readJsonFromUrl(URL);
             if (j.get("ticket_id").equals(ticketId)) {
             	String screening_time = j.getJSONObject("screening_id").getString("screening_time");
-            	LocalDateTime ldt = LocalDateTime.parse(screening_time);
-            	String screening_id = j.getJSONObject("screening_id").getString("id");
+            	String date1 = "";
+				int k =0 ;
+				while(k < screening_time.length()-6)
+				{
+					char c = screening_time.charAt(k);
+					if(c=='T')
+						c = ' ';
+					date1 += c;
+					k++;
+				}
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+				LocalDateTime ldt = LocalDateTime.parse(date1.toString(), formatter);
+            	String screening_id = String.valueOf(j.getJSONObject("screening_id").getInt("id"));
             	String movie_name = j.getJSONObject("screening_id").getJSONObject("movie_id").getString("movie_name");
             	String theatre_name = j.getJSONObject("screening_id").getJSONObject("theatre_id").getString("theatre_name");
             	MovieScreening ms = new MovieScreening(ldt, theatre_name, movie_name, screening_id);
-            	int seat_num = Integer.parseInt(j.getString("seat_no"));
+            	int seat_num = j.getInt("seat_no");
 
             	Ticket t = new Ticket(ticketId, ms, seat_num);
             	return t;
@@ -349,29 +341,5 @@ public class DatabaseManager {
 	    return sb.toString();
 	  }
 	
-	
-	// USE THIS FOR TESTING
-//		public static void main(String[] args) throws ParseException, IOException {
-//			DatabaseManager inst = DatabaseManager.getInstance();
-//			try {
-//				System.out.println("Testing");
-//				JSONArray j = inst.readJsonArrayFromUrl("https://calm-shelf-23678.herokuapp.com/swagDB/movies?format=json");
-//				System.out.println(j.length());
-//				System.out.println(j);
-//			} catch (JSONException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		
-//			
-//	        inst.processMethod("save-debit", "POST");
-//	        Map<String,String> arguments = new HashMap<>();
-//	        arguments.put("user_id", "johncena@shaw.ca");
-//	        arguments.put("debit_number", "99");
-//	        inst.processPost(arguments);
-//		}
 }
 

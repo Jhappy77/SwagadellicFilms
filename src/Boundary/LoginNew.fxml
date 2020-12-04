@@ -9,14 +9,30 @@
 
 <AnchorPane prefHeight="330.0" prefWidth="576.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.LoginView">
    <children>
-      <TextField fx:id="txtusername" layoutX="160.0" layoutY="89.0" prefHeight="25.0" prefWidth="229.0" promptText="Enter your username" style="-fx-background-color: #D3D3D3;" />
-      <Button layoutX="458.0" layoutY="15.0" mnemonicParsing="false" onAction="#signUp" prefHeight="41.0" prefWidth="77.0" style="-fx-background-color: #000080;" text="Sign Up" textFill="WHITE" />
-      <Button layoutX="211.0" layoutY="255.0" mnemonicParsing="false" onAction="#Login" prefHeight="41.0" prefWidth="127.0" style="-fx-background-color: #000080;" text="LogIn" textFill="WHITE" />
-      <Button layoutX="476.0" layoutY="296.0" mnemonicParsing="false" onAction="#returnToMenu" style="-fx-background-color: #000080;" text="Back to Menu" textFill="WHITE" />
-      <Label fx:id="lbstatus" layoutX="160.0" layoutY="200.0" prefHeight="17.0" prefWidth="291.0" text="STATUS" textFill="NAVY">
+      <TextField fx:id="txtusername" layoutX="160.0" layoutY="89.0" prefHeight="25.0" prefWidth="229.0" promptText="Enter your username" style="-fx-background-color: #D3D3D3;">
          <font>
-            <Font name="Candara" size="18.0" />
+            <Font size="14.0" />
+         </font></TextField>
+      <Button layoutX="458.0" layoutY="15.0" mnemonicParsing="false" onAction="#signUp" prefHeight="41.0" prefWidth="77.0" style="-fx-background-color: #ff4c4c;" text="Sign Up" textFill="WHITE" />
+      <Button layoutX="211.0" layoutY="255.0" mnemonicParsing="false" onAction="#Login" prefHeight="41.0" prefWidth="127.0" style="-fx-background-color: #ff4c4c;" text="LogIn" textFill="WHITE" />
+      <Button layoutX="476.0" layoutY="296.0" mnemonicParsing="false" onAction="#returnToMenu" style="-fx-background-color: #ff4c4c;" text="Back to Menu" textFill="WHITE" />
+      <Label fx:id="lbstatus" layoutX="160.0" layoutY="200.0" prefHeight="17.0" prefWidth="291.0" text="STATUS" textFill="RED">
+         <font>
+            <Font name="Candara" size="14.0" />
          </font></Label>
-      <PasswordField fx:id="txtpassword" layoutX="160.0" layoutY="153.0" prefHeight="25.0" prefWidth="229.0" promptText="Enter your password" style="-fx-background-color: #D3D3D3;" />
+      <PasswordField fx:id="txtpassword" layoutX="160.0" layoutY="143.0" prefHeight="25.0" prefWidth="229.0" promptText="Enter your password" style="-fx-background-color: #D3D3D3;">
+         <font>
+            <Font size="14.0" />
+         </font></PasswordField>
+      <Label layoutX="203.0" layoutY="36.0" text="SWAGADELLIC" textFill="#ff4c4c">
+         <font>
+            <Font name="Haettenschweiler" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="303.0" layoutY="36.0" text="FILMS" textFill="#cdcdcd">
+         <font>
+            <Font name="Haettenschweiler" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

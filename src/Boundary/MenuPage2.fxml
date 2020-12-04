@@ -3,15 +3,27 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="272.0" prefWidth="274.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.Menu">
+<AnchorPane prefHeight="400.0" prefWidth="539.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.Menu">
    <children>
-      <Button layoutX="96.0" layoutY="93.0" mnemonicParsing="false" onAction="#bookTickets" text="Book Tickets" />
-      <Button layoutX="99.0" layoutY="136.0" mnemonicParsing="false" onAction="#cancelTicket" text="Cancel Ticket" />
-      <Button layoutX="118.0" layoutY="180.0" mnemonicParsing="false" onAction="#returnToMenu" text="return" />
-      <Button layoutX="208.0" layoutY="14.0" mnemonicParsing="false" onAction="#signUp" text="Subscribe" />
-      <Button layoutX="153.0" layoutY="14.0" mnemonicParsing="false" onAction="#logIn" text="Sign In" />
-      <Button layoutX="11.0" layoutY="14.0" mnemonicParsing="false" onAction="#payAnnualFee" text="Pay Annual Fee" />
-      <Label fx:id="userstatus" layoutX="59.0" layoutY="217.0" prefHeight="17.0" prefWidth="185.0" text="Status" />
+      <Button layoutX="174.0" layoutY="158.0" mnemonicParsing="false" onAction="#bookTickets" prefHeight="25.0" prefWidth="140.0" style="-fx-background-color: #ff4c4c;" text="Book Tickets" textFill="WHITE" />
+      <Button layoutX="198.0" layoutY="358.0" mnemonicParsing="false" onAction="#cancelTicket" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #cdcdcd;" text="Cancel Ticket" />
+      <Button layoutX="425.0" layoutY="358.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="25.0" style="-fx-background-color: #393939;" text="Return to Menu" textFill="WHITE" />
+      <Button layoutX="164.0" layoutY="82.0" mnemonicParsing="false" onAction="#signUp" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #393939;" text="Not a member?" textFill="WHITE" />
+      <Button layoutX="271.0" layoutY="82.0" mnemonicParsing="false" onAction="#logIn" prefHeight="25.0" prefWidth="53.0" style="-fx-background-color: #393939;" text="Sign In" textFill="WHITE" />
+      <Button layoutX="174.0" layoutY="188.0" mnemonicParsing="false" onAction="#payAnnualFee" prefHeight="25.0" prefWidth="140.0" style="-fx-background-color: #ff4c4c;" text="Pay Annual Fee" textFill="WHITE" />
+      <Label fx:id="userstatus" layoutX="177.0" layoutY="221.0" prefHeight="17.0" prefWidth="185.0" text="Status" textFill="RED" />
+      <Label layoutX="137.0" layoutY="35.0" text="SWAGADELLIC" textFill="#ff4c4c">
+         <font>
+            <Font name="Haettenschweiler" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="287.0" layoutY="35.0" text="FILMS" textFill="#cdcdcd">
+         <font>
+            <Font name="Haettenschweiler" size="36.0" />
+         </font>
+      </Label>
+      <Button layoutX="475.0" layoutY="82.0" mnemonicParsing="false" onAction="#signOut" style="-fx-background-color: #393939;" text="Sign Out" textFill="WHITE" />
    </children>
 </AnchorPane>

@@ -9,7 +9,7 @@ public class AnonymousUser implements User{
 	@Override
 	public float getRefundFee() {
 		// TODO Auto-generated method stub
-		return 1.15f;
+		return 0.15f;
 	}
 
 	@Override

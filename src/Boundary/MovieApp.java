@@ -5,20 +5,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import Controller.MovieController;
+import Model.Ticket;
 import Controller.PaymentController;
 import Controller.UserController;
 import Model.AnonymousUser;
 import Model.MovieScreening;
-import Model.Ticket;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
  
 public class MovieApp extends Application {
@@ -28,7 +25,7 @@ public class MovieApp extends Application {
 
     public static void main(String[] args) {
     	MovieController.showTimes = new ArrayList<MovieScreening>();
-//    	PaymentController.tickets = new ArrayList<Ticket>();
+//    	PaymentController.ticketsInfo = new ArrayList<Ticket>();
     	PaymentController.bookedSeats = new ArrayList<Seat>();
         launch(args);
     }

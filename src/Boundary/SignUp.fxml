@@ -20,7 +20,7 @@
       <Button layoutX="116.0" layoutY="453.0" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="25.0" prefWidth="81.0" style="-fx-background-color: #000000;" text="Return" textFill="WHITE" />
       <Label fx:id="lbstatus" layoutX="39.0" layoutY="386.0" prefHeight="17.0" prefWidth="205.0" text="Status" textFill="#970000" />
       <TextField fx:id="txtaddress" layoutX="76.0" layoutY="196.0" promptText="address" style="-fx-background-color: #000000;" />
-      <CheckBox layoutX="90.0" layoutY="321.0" mnemonicParsing="false" onAction="#checkBox" style="-fx-background-color: #000000;" text="Credit" />
-      <CheckBox layoutX="172.0" layoutY="321.0" mnemonicParsing="false" onAction="#checkBox" style="-fx-background-color: #000000;" text="Debit" />
+      <CheckBox fx:id="credit" layoutX="90.0" layoutY="321.0" mnemonicParsing="false" onAction="#checkBox" style="-fx-background-color: #000000;" text="Credit" />
+      <CheckBox fx:id="debit" layoutX="172.0" layoutY="321.0" mnemonicParsing="false" onAction="#checkBox" style="-fx-background-color: #000000;" text="Debit" />
    </children>
 </AnchorPane>

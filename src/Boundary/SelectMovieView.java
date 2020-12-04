@@ -8,10 +8,12 @@ import java.util.List;
 
 import Controller.DatabaseManager;
 import Controller.MovieController;
-import Controller.SeatController;
+import Controller.UserController;
+import Model.AnonymousUser;
 import Model.Movie;
 import Model.MovieScreening;
 import Model.MovieTheatre;
+import Model.RegisteredUser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,10 +22,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class SelectMovieView {
@@ -35,9 +35,6 @@ public class SelectMovieView {
 	private Movie m;
 	Stage window;
 	
-//	ObservableList<String> cbbtList ;
-//	ObservableList<String> cbbmList ;
-//	ObservableList<String> cbbsList ;
 	
 	ObservableList<String> cbbmList ;
 	ObservableList<String> cbbtList ;
@@ -68,7 +65,10 @@ public class SelectMovieView {
 		 cbbtList.removeAll(cbbtList);
 		 cbbmList.removeAll(cbbmList);
 		 cbbsList.removeAll(cbbsList);
-		 MList = DatabaseManager.getInstance().queryMovies();
+		 if(UserController.getUser() instanceof AnonymousUser)
+			 MList = DatabaseManager.getInstance().queryMovies();
+		 else if(UserController.getUser() instanceof RegisteredUser)
+			 MList = DatabaseManager.getInstance().queryMoviesWithEarlies();
 		 for(int i=0; i<MList.size(); i++)
 		 {
 			 cbbmList.add(MList.get(i).getName());

@@ -5,21 +5,51 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.PaymentView">
+<AnchorPane prefHeight="502.0" prefWidth="594.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Boundary.PaymentView">
    <children>
-      <Button layoutX="85.0" layoutY="161.0" mnemonicParsing="false" onAction="#confirmPayment" text="Confirm Payment" />
-      <ChoiceBox fx:id="cbct" layoutX="84.0" layoutY="26.0" prefWidth="150.0" />
-      <Label layoutX="21.0" layoutY="30.0" text="Card Type:" />
-      <Label layoutX="13.0" layoutY="65.0" text="Card Number" />
-      <TextField fx:id="txtcn" layoutX="99.0" layoutY="61.0" />
-      <Button layoutX="13.0" layoutY="161.0" mnemonicParsing="false" onAction="#goBack" text="Go Back" />
-      <Label fx:id="paymentstatus" layoutX="29.0" layoutY="124.0" prefHeight="17.0" prefWidth="205.0" text="Status" textFill="#970000" />
-      <Label fx:id="amount" layoutX="29.0" layoutY="100.0" prefHeight="17.0" prefWidth="198.0" text="amount" />
-      <Button layoutX="213.0" layoutY="161.0" mnemonicParsing="false" onAction="#buyMoreTickets" text="Buy more!" />
-      <Label layoutX="25" layoutY="200" text="Cart Content: " />
+      <Button layoutX="308.0" layoutY="442.0" mnemonicParsing="false" onAction="#confirmPayment" style="-fx-background-color: #ff4c4c;" text="Confirm Payment" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <ChoiceBox fx:id="cbct" layoutX="222.0" layoutY="95.0" prefWidth="150.0" />
+      <Label layoutX="144.0" layoutY="98.0" text="Card Type:">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <TextField fx:id="txtcn" layoutX="223.0" layoutY="139.0" promptText="Card number" />
+      <Button layoutX="26.0" layoutY="442.0" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: #cdcdcd;" text="Go Back">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Label fx:id="paymentstatus" layoutX="14.0" layoutY="203.0" prefHeight="17.0" prefWidth="205.0" text="Status" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label fx:id="amount" layoutX="223.0" layoutY="171.0" prefHeight="20.0" prefWidth="83.0" text="Amount">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Button layoutX="497.0" layoutY="442.0" mnemonicParsing="false" onAction="#buyMoreTickets" style="-fx-background-color: #ff4c4c;" text="Buy more!" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
       <VBox fx:id="cartContent" layoutX="25" layoutY="230" />
+      <Label layoutX="210.0" layoutY="29.0" text="SWAGADELLIC" textFill="#ff4c4c">
+         <font>
+            <Font name="Haettenschweiler" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="331.0" layoutY="29.0" text="FILMS" textFill="#cdcdcd">
+         <font>
+            <Font name="Haettenschweiler" size="30.0" />
+         </font>
+      </Label>
+      <Button layoutX="144.0" layoutY="442.0" mnemonicParsing="false" onAction="#addToRefund" style="-fx-background-color: #cdcdcd;" text="Add Refund">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
    </children>
 </AnchorPane>

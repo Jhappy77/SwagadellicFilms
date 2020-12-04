@@ -1,22 +1,15 @@
 package Boundary;
 
 import java.io.IOException;
-
-import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
 
 import org.json.JSONException;
 
-import Controller.DatabaseManager;
-import Controller.MovieController;
 import Controller.PaymentController;
 import Controller.PaymentException;
 import Model.Cart;
 import Model.CreditMethod;
 import Model.DebitMethod;
-import Model.FinancialInstitution;
-import Model.MovieScreening;
-import Model.Payment;
-import Model.Ticket;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,6 +27,7 @@ import javafx.stage.Stage;
 public class PaymentView implements View{
 
 	Stage window;
+	Stage ticket;
 	
 	ObservableList<String> cbctList;
 	
@@ -48,6 +42,12 @@ public class PaymentView implements View{
 	
 	@FXML
 	private Label amount;
+	
+	@FXML 
+	private Label ticketInfo;
+	
+	@FXML
+	private Label ticketInfo2;
 	
 	@FXML
 	private TextField txtcn;
@@ -82,38 +82,70 @@ public class PaymentView implements View{
 	public void confirmPayment(ActionEvent event) throws IOException, JSONException, PaymentException {
 		String paymentType = cbct.getValue();
 		String cardNumber = txtcn.getText();
-		if(paymentType.equals("Credit Card"))
+		if(paymentType.isEmpty() || cardNumber.isEmpty())
 		{
-			PaymentMethodComponent pmc = new PaymentMethodComponent();
-			pmc.setPaymentMethod(new CreditMethod(Integer.parseInt(cardNumber)));
-			boolean paymentSucceeded = PaymentController.payTickets(pmc.getMethod());
-			if(paymentSucceeded)
-			{
-				setAmount();
-				paymentstatus.setText("Amount paid successully");
-			}
-			else {
-				paymentstatus.setText("Credit card denied");
-			}
+			paymentstatus.setText("Fill out all fields");
 		}
 		else
 		{
-			PaymentMethodComponent pmc = new PaymentMethodComponent();
-			pmc.setPaymentMethod(new DebitMethod(Integer.parseInt(cardNumber)));
-			if(PaymentController.payTickets(pmc.getMethod()))
+			if(paymentType.equals("Credit Card"))
 			{
-				setAmount();
-				paymentstatus.setText("Amount paid successully");
+				for(int i=0; i<Cart.getInstance().getTickets().size(); i++)
+					Cart.getInstance().getTicketsInfo().add(Cart.getInstance().getTickets().get(i));
+				PaymentMethodComponent pmc = new PaymentMethodComponent();
+				pmc.setPaymentMethod(new CreditMethod(Integer.parseInt(cardNumber)));
+				boolean paymentSucceeded = PaymentController.payTickets(pmc.getMethod());
+				if(paymentSucceeded)
+				{
+					setAmount();
+					ticket = new Stage();
+					ticketInfo = new Label();
+					Parent root =FXMLLoader.load(getClass().getResource("/Boundary/Ticket.fxml"));
+					Scene scene= new Scene(root);
+					ticket.setScene(scene);
+					ticket.show();
+					paymentstatus.setText("Amount paid successully");
+				}
+				else {
+					paymentstatus.setText("Credit card denied");
+				}
 			}
 			else
-				paymentstatus.setText("Credit card denied");
+			{
+				for(int i=0; i<Cart.getInstance().getTickets().size(); i++)
+					Cart.getInstance().getTicketsInfo().add(Cart.getInstance().getTickets().get(i));
+				PaymentMethodComponent pmc = new PaymentMethodComponent();
+				pmc.setPaymentMethod(new DebitMethod(Integer.parseInt(cardNumber)));
+				if(PaymentController.payTickets(pmc.getMethod()))
+				{
+					setAmount();
+					ticket = new Stage();
+					ticketInfo = new Label();
+					Parent root =FXMLLoader.load(getClass().getResource("/Boundary/Ticket.fxml"));
+					Scene scene= new Scene(root);
+					ticket.setScene(scene);
+					ticket.show();
+					paymentstatus.setText("Amount paid successully");
+				}
+				else
+					paymentstatus.setText("Debit card denied");
+			}
 		}
+	}
+	
+	public void addToRefund(ActionEvent event) throws IOException
+	{
+		window = (Stage) ((Button) event.getSource()).getScene().getWindow();
+		Parent root =FXMLLoader.load(getClass().getResource("/Boundary/Cancel.fxml"));
+		Scene scene= new Scene(root);
+		window.setScene(scene);
+		window.show();
 	}
 	
 	private void setAmount() {
 		String totalPrice = Float.toString(PaymentController.getTotalPrice());
 		if(amount != null) {
-		amount.setText(totalPrice);
+		amount.setText("$" + totalPrice);
 		} else {
 			amount = new Label();
 			amount.setText(totalPrice);
@@ -126,6 +158,56 @@ public class PaymentView implements View{
 		Scene scene= new Scene(root);
 		window.setScene(scene);
 		window.show();
+	}
+	
+	public void ShowTickets(ActionEvent event)
+	{
+		
+		String message = "";
+		DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+		if(Cart.getInstance().getTicketsInfo().size() > 0 && Cart.getInstance().getTicketsInfo().size() < 6)
+		{
+			for(int i=0; i<Cart.getInstance().getTicketsInfo().size(); i++)
+			{
+				message+= "Ticket " + (i+1) + ": \n"
+						+ "Ticket id: " + Cart.getInstance().getTicketsInfo().get(i).getId() + "\n"
+						+ "Movie name: " + Cart.getInstance().getTicketsInfo().get(i).getScreening().getMovieName() + "\n"
+						+ "Movie theatre: " + Cart.getInstance().getTicketsInfo().get(i).getScreening().getTheatreName() + "\n"
+						+ "Screening time: " + Cart.getInstance().getTicketsInfo().get(i).getScreening().getMovieDate().format(formatter) + "\n"
+						+ "Seat: " + Cart.getInstance().getTicketsInfo().get(i).getSeatNumber() + "\n\n";
+			}
+			ticketInfo.setText(message);
+		}
+		else if (Cart.getInstance().getTicketsInfo().size() >= 6)
+		{
+			String message2 = "";
+			for(int i=0; i<Cart.getInstance().getTicketsInfo().size(); i++)
+			{
+				if(i<6)
+				{
+					message+= "Ticket " + (i+1) + ": \n"
+							+ "Ticket id: " + Cart.getInstance().getTicketsInfo().get(i).getId() + "\n"
+							+ "Movie name: " + Cart.getInstance().getTicketsInfo().get(i).getScreening().getMovieName() + "\n"
+							+ "Movie theatre: " + Cart.getInstance().getTicketsInfo().get(i).getScreening().getTheatreName() + "\n"
+							+ "Screening time: " + Cart.getInstance().getTicketsInfo().get(i).getScreening().getMovieDate().format(formatter) + "\n"
+							+ "Seat: " + Cart.getInstance().getTicketsInfo().get(i).getSeatNumber() + "\n\n";
+				}
+				else
+				{
+					message2+= "Ticket " + (i+1) + ": \n"
+							+ "Ticket id: " + Cart.getInstance().getTicketsInfo().get(i).getId() + "\n"
+							+ "Movie name: " + Cart.getInstance().getTicketsInfo().get(i).getScreening().getMovieName() + "\n"
+							+ "Movie theatre: " + Cart.getInstance().getTicketsInfo().get(i).getScreening().getTheatreName() + "\n"
+							+ "Screening time: " + Cart.getInstance().getTicketsInfo().get(i).getScreening().getMovieDate().format(formatter) + "\n"
+							+ "Seat: " + Cart.getInstance().getTicketsInfo().get(i).getSeatNumber() + "\n\n";
+				}
+			}
+			ticketInfo.setText(message);
+			ticketInfo2.setText(message2);
+			
+		}
+		else if(Cart.getInstance().getTicketsInfo().size() == 0)
+			ticketInfo.setText("No tickets purchased");
 	}
 	
 	

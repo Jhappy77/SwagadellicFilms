@@ -2,8 +2,6 @@ package Boundary;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 
